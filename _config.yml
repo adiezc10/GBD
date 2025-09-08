@@ -5,29 +5,15 @@ description: "Recursos, apuntes y materiales del módulo GBD de ASIR"
 baseurl: "" # el subpath de tu sitio, por ejemplo /blog
 url: "https://adiezc10.github.io/GBD" # la URL base del sitio
 
-# Tema
-theme: jekyll-theme-cayman
-
-# Navegación
-show_downloads: true
-markdown: kramdown
-permalink: pretty
-
-# Plugins
 plugins:
   - jekyll-relative-links
   - jemoji
 relative_links:
   enabled: true
 
-# Configuración de colecciones (opcional)
-collections:
-  apuntes:
-    output: true
-  ejercicios:
-    output: true
-  proyectos:
-    output: true
+theme: jekyll-theme-cayman
+github:
+  is_project_page: false
 
 # Configuración de SEO
 seo:
