@@ -5,13 +5,8 @@ description: "Recursos, apuntes y materiales del módulo GBD de ASIR"
 baseurl: "" # el subpath de tu sitio, por ejemplo /blog
 url: "https://adiezc10.github.io/GBD" # la URL base del sitio
 
-# Información del autor
-author:
-  name: "Álvaro Díez"
-  github: "adiezc10"
-
 # Tema
-theme: jekyll-theme-slate # Puedes cambiarlo por otro como 'minimal', 'academicpages', etc.
+theme: jekyll-theme-cayman
 
 # Navegación
 show_downloads: true
@@ -20,8 +15,10 @@ permalink: pretty
 
 # Plugins
 plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
+  - jekyll-relative-links
+  - jemoji
+relative_links:
+  enabled: true
 
 # Configuración de colecciones (opcional)
 collections:
@@ -36,8 +33,8 @@ collections:
 seo:
   name: "Gestión de Bases de Datos - ASIR"
   type: "Education"
-  description: "Material académico para el módulo GBD impartido por Álvaro Diez"
+  description: "Material académico para el módulo GBD"
 
-# Exclude files from build
-exclude:
+
+
 
