@@ -1,10 +1,5 @@
 # Sitio académico para el módulo Gestión de Bases de Datos
 
-title: "Gestión de Bases de Datos"
-description: "Recursos, apuntes y materiales del módulo GBD de ASIR"
-baseurl: "" # el subpath de tu sitio, por ejemplo /blog
-url: "https://adiezc10.github.io/GBD" # la URL base del sitio
-
 plugins:
   - jekyll-relative-links
   - jemoji
@@ -14,13 +9,3 @@ relative_links:
 theme: jekyll-theme-cayman
 github:
   is_project_page: false
-
-# Configuración de SEO
-seo:
-  name: "Gestión de Bases de Datos - ASIR"
-  type: "Education"
-  description: "Material académico para el módulo GBD"
-
-
-
-
