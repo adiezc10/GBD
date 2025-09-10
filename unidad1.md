@@ -58,9 +58,66 @@ a) Su contenido interno
 > **Ejemplo práctico**: si abrimos un fichero .docx con el bloc de notas, veremos una secuencia de caracteres sin sentido, ya que el editor no interpreta el formato binario. En cambio, un .txt mostrará el contenido directamente.
 
 b) Su organización o forma de acceso
-- **Ficheros secuenciales**: los datos se almacenan uno tras otro. Para acceder a un dato específico, es necesario recorrer todos los anteriores. Son eficientes para escritura continua, pero lentos para búsquedas. Ejemplo: una lista de clientes en un fichero .txt.
-- **Ficheros de acceso directo** (organización directa): permiten acceder a un dato concreto sin necesidad de recorrer todo el fichero. Esto se logra mediante posiciones fijas o cálculos de desplazamiento. Ejemplo: un fichero donde cada registro ocupa exactamente 100 bytes.
-- **Ficheros indexados**: utilizan estructuras auxiliares (índices) que permiten localizar rápidamente los datos. El índice actúa como una guía que relaciona claves con posiciones en el fichero. Ejemplo: un fichero de libros con un índice por ISBN.
+- **Ficheros secuenciales**: los datos se almacenan uno tras otro. Para acceder a un dato específico, es necesario recorrer todos los anteriores. Son eficientes para escritura continua, pero lentos para búsquedas. 
+
+  **Ejemplo**: una lista de clientes en un fichero .txt.
+
+  - En el siguiente ejemplo, para acceder al cliente con DNI 11223344C, hay que recorrer todos los registros anteriores.
+
+| DNI        | Nombre | Apellido | Ciudad   | Teléfono   |
+|------------|--------|----------|----------|------------|
+| 12345678A  | Juan   | Pérez    | Madrid   | 612345678  |
+| 87654321B  | Ana    | Gómez    | Valencia | 698765432  |
+| 11223344C  | Luis   | Martín   | Sevilla  | 677889900  |
+| 44332211D  | María  | López    | Bilbao   | 699112233  |
+
+- **Ficheros de acceso directo** (organización directa): permiten acceder a un dato concreto sin necesidad de recorrer todo el fichero. Esto se logra mediante posiciones fijas o cálculos de desplazamiento. 
+
+  **Ejemplo**: un fichero donde cada registro ocupa exactamente 100 bytes.
+
+  En este tipo de fichero, cada registro ocupa exactamente **100 bytes**. Esto permite calcular la posición de cualquier registro sin necesidad de recorrer los anteriores.
+
+  Para acceder al **tercer registro** (Luis Martín) dentro de la siguiente tabla de clientes, se multiplica su posición en la tabla (2) por el tamaño del registro:
+
+| Posición | DNI        | Nombre         | Apellido       | Ciudad     | Teléfono   |
+|----------|------------|----------------|----------------|------------|------------|
+| 0        | 12345678A  | Juan           | Pérez          | Madrid     | 612345678  |
+| 100      | 87654321B  | Ana            | Gómez          | Valencia   | 698765432  |
+| 200      | 11223344C  | Luis           | Martín         | Sevilla    | 677889900  |
+| 300      | 44332211D  | María          | López          | Bilbao     | 699112233  |
+
+- **Ficheros indexados**: utilizan estructuras auxiliares (índices) que permiten localizar rápidamente los datos. El índice actúa como una guía que relaciona claves con posiciones en el fichero. 
+
+  **Ejemplo**: un fichero de libros con un índice por ISBN.
+
+📘 Tabla principal: Libros
+
+| Posición | ISBN         | Título                      | Autor           |
+|----------|--------------|-----------------------------|-----------------|
+| 0        | 978-84-12345 | Introducción a las BD       | M. Zorrilla     |
+| 1        | 978-84-54321 | Fundamentos de SQL          | R. Duque        |
+| 2        | 978-84-67890 | Diseño de sistemas          | A. Piattini     |
+| 3        | 978-84-98765 | Seguridad en BD             | J. García       |
+
+📗 Índice por ISBN
+
+| ISBN         | Posición en fichero |
+|--------------|---------------------|
+| 978-84-12345 | 0                   |
+| 978-84-54321 | 1                   |
+| 978-84-67890 | 2                   |
+| 978-84-98765 | 3                   |
+
+Para acceder al libro con ISBN `978-84-67890`, el sistema consulta el índice y localiza que está en la **posición 2** del fichero principal. No es necesario recorrer los registros anteriores.
+
+✅ Ventajas
+- Búsqueda rápida por clave.
+- Ideal para grandes volúmenes de datos.
+- Permite múltiples índices (por autor, título, etc.).
+
+❌ Limitaciones
+- Requiere mantener y actualizar los índices.
+- Mayor complejidad al introducir datos y borrarlos.
 
 ### 1.2 Problemas de los sistemas basados en ficheros
 Aunque los ficheros son útiles para almacenar información, presentan varias limitaciones cuando se utilizan como base para sistemas de gestión:
@@ -73,8 +130,32 @@ Aunque los ficheros son útiles para almacenar información, presentan varias li
 
 > **Ejemplo**: en una empresa, el departamento de ventas y el de contabilidad pueden tener ficheros distintos con los datos de los clientes. Si un cliente cambia de dirección, ambos ficheros deben actualizarse manualmente. Si se olvida hacerlo en uno de ellos, se genera una inconsistencia.
 
-> Actividades de aprendizaje 
+📁 Departamento de Ventas – Fichero `clientes_ventas.txt`
 
+| DNI        | Nombre | Dirección         | Teléfono   |
+|------------|--------|-------------------|------------|
+| 12345678A  | Juan   | Calle Mayor, 12   | 612345678  |
+| 87654321B  | Ana    | Av. Valencia, 45  | 698765432  |
+
+📁 Departamento de Contabilidad – Fichero `clientes_contabilidad.txt`
+
+| DNI        | Nombre | Dirección         | Teléfono   |
+|------------|--------|-------------------|------------|
+| 12345678A  | Juan   | Calle Mayor, 12   | 612345678  |
+| 87654321B  | Ana    | **Av. Valencia, 47** | 698765432  |
+
+⚠️ Problemas detectados
+
+- **Redundancia**: los datos del cliente `Ana` aparecen en dos ficheros distintos.
+- **Inconsistencia**: la dirección de `Ana` es diferente en cada fichero.
+- **Dependencia física**: si se cambia el formato de uno de los ficheros, los programas que lo usan pueden dejar de funcionar.
+- **Falta de seguridad**: cualquier usuario con acceso al sistema puede modificar los ficheros sin control.
+- **Acceso limitado**: no se pueden hacer consultas como “clientes con más de una factura impagada” sin desarrollar un programa específico.
+- **Dificultad para compartir datos**: cada departamento usa su propio fichero, lo que complica la integración de la información.
+
+Este ejemplo muestra cómo el uso de ficheros como sistema de almacenamiento puede generar errores, duplicidades y dificultades de gestión. Las bases de datos permiten evitar estos problemas.
+
+> Actividades de aprendizaje 
 
 ## 2. Bases de Datos
 Las bases de datos son una evolución natural de los sistemas de almacenamiento de información. Frente a las limitaciones de los ficheros tradicionales, las bases de datos permiten organizar, acceder y gestionar grandes volúmenes de información de forma eficiente, segura y estructurada.
@@ -88,6 +169,7 @@ A continuación se definen los principales elementos que componen una base de da
 - **Campo**: conjunto de datos del mismo tipo que representan una característica. Ejemplo: Nombre, Fecha de nacimiento.
 - **Registro**: conjunto de campos que describen una entidad. Ejemplo: los datos de un alumno.
 - **Tabla**: colección de registros organizados en filas y columnas. Ejemplo: tabla Alumnos con campos DNI, Nombre, Curso.
+- **Campo clave**: Es un campo especial que identifica de forma única cada registro. Ejemplo: el DNI es un campo único en una tabla de alumnos. 
 
 ![Conceptos básicos de las basees de datos](./img/ConceptosBD.jpg)
 
@@ -96,8 +178,8 @@ Otros conceptos:
 - **Índice**: estructura que acelera la búsqueda de registros en una tabla.
 - **Vista**: tabla virtual generada a partir de una o varias tablas, útil para mostrar solo ciertos datos.
 - **Informe**: presentación estructurada de los datos, normalmente como salida de una consulta.
-- **Script**: conjunto de instrucciones que automatizan tareas sobre la base de datos.
-- Esquema o diccionario de datos: define la estructura de la base de datos (tablas, campos, relaciones).
+- **Scripts o guiones**: conjunto de instrucciones que automatizan tareas sobre la base de datos.
+- **Procedimientos**: son un tipo especial de script que se encuentra almacenado en la base de datos.
 
 > **Ejemplo**: en una base de datos escolar, podríamos tener una tabla Alumnos con campos como DNI, Nombre, Apellidos, Fecha de nacimiento, y otra tabla Matriculaciones que relaciona alumnos con módulos.
 
@@ -113,14 +195,27 @@ Las bases de datos se utilizan en prácticamente todos los ámbitos de la socied
 
 Tipos de bases de datos según el modelo de datos:
 - **Jerárquicas**: organizan los datos en forma de árbol. *Obsoletas*.
+
+![Ejemplo de base de datos jerárquica](./img/bd_jerarquica.webp)
+
 - **En red**: permiten relaciones más complejas entre registros. *También en desuso*.
 - **Relacionales**: organizan los datos en tablas relacionadas. Son las más utilizadas. Ejemplo: MySQL, PostgreSQL.
+
+![Ejemplo de base de datos relacional](./img/bd_relacional.jpg)
+
 - **Orientadas a objetos**: permiten almacenar objetos completos con sus atributos y métodos.
+
+![Ejemplo de base de datos orientada a objetos](./img/bd_orientadaObjetos.png)
+
 - **Objeto-relacionales**: combinan características de las relacionales y orientadas a objetos.
 - **Documentales**: almacenan datos semiestructurados como JSON o XML. Ejemplo: MongoDB.
+
+![Ejemplo de base de datos documental](./img/bd_mongoDB.png)
+
 - **Multidimensionales**: usadas en inteligencia de negocio (OLAP).
+
+![Ejemplo de base de datos multidimensional](./img/bd_multidimensional.png)
 - **Deductivas**: permiten realizar inferencias a partir de reglas lógicas.
->**Actividad sugerida**: Investiga y clasifica cinco bases de datos reales (comerciales o libres) según su modelo de datos.
 
 ### 2.3 Ubicación de la información
 La ubicación física de una base de datos influye en su accesibilidad, rendimiento y seguridad. Existen varios modelos:
