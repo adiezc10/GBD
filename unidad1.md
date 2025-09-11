@@ -17,13 +17,11 @@ Esta unidad tiene como objetivo introducir los conceptos básicos relacionados c
   - [4. Bases de Datos Centralizadas y Distribuidas](#4-bases-de-datos-centralizadas-y-distribuidas)
     - [4.1 Bases de datos centralizadas](#41-bases-de-datos-centralizadas)
     - [4.2 Bases de datos distribuidas](#42-bases-de-datos-distribuidas)
-    - [4.3 Modelos relacionados](#43-modelos-relacionados)
+    - [4.3 Otros modelos de basess de datos](#43-otros-modelos-de-basess-de-datos)
   - [5. Modelo de Capas](#5-modelo-de-capas)
     - [5.1 Arquitectura ANSI-SPARC: los tres niveles](#51-arquitectura-ansi-sparc-los-tres-niveles)
-    - [5.2 Independencia de los datos](#52-independencia-de-los-datos)
-    - [5.3 Modelo funcional de cinco capas](#53-modelo-funcional-de-cinco-capas)
+    - [5.2 Modelo funcional de cinco capas](#52-modelo-funcional-de-cinco-capas)
   - [6. Lenguaje SQL](#6-lenguaje-sql)
-  - [7. Transacciones y ACID](#7-transacciones-y-acid)
   - [8. Diseño de Bases de Datos](#8-diseño-de-bases-de-datos)
   - [9. Tipos de Usuarios](#9-tipos-de-usuarios)
   - [10. Actividades de aprendizaje](#10-actividades-de-aprendizaje)
@@ -33,7 +31,7 @@ En el contexto de los sistemas informáticos, el almacenamiento de la informaci�
 
 A lo largo de la historia de la informática, el tratamiento de la información ha pasado de ser un proceso centrado en los programas (orientado al proceso) a estar centrado en los datos (orientado a la información). Esta evolución ha permitido mejorar la eficiencia, la seguridad, la integridad y la accesibilidad de los datos, especialmente en entornos multiusuario y distribuidos.
 
-![Sistema distribuído](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIhTq1sYW-vo483fv0pQ2BhNonPsvfcSGyjGlE3N_op8PTQlxk4tMUZCSEKUFWoLEqaZXKJAutXxZAx27UzUd1SG7JcBD3nrABEMX-6wMv777_5KUwSEQkcnaD6Py2l-nEw8Pf_6CHi_9_/s320/sistemasdistribuidos.png)
+![Sistema distribuído](./img/sistemasdistribuidos.png)
 
 ## 1. Ficheros
 Los ficheros son estructuras de información que permiten almacenar datos en dispositivos físicos como discos duros, memorias USB, SSD, etc. Son gestionados por el sistema operativo y constituyen la forma más básica de almacenamiento digital. Cada fichero tiene un nombre y una extensión que indica el tipo de contenido que almacena (por ejemplo, .txt, .jpg, .mp3).
@@ -164,12 +162,16 @@ Una base de datos no es solo un conjunto de datos, sino una estructura diseñada
 
 ### 2.1 Conceptos
 A continuación se definen los principales elementos que componen una base de datos:
-- **Dato**: unidad mínima de información. Ejemplo: 2025, Madrid, Juan.
+- **Dato**: unidad mínima de información. Es un hecho conocido que puede registrarse y tiene un significado implícito Ejemplo: 2025, Madrid, Juan.
 - **Tipo de dato**: define la naturaleza del dato. Ejemplos: texto, número entero, fecha, booleano.
 - **Campo**: conjunto de datos del mismo tipo que representan una característica. Ejemplo: Nombre, Fecha de nacimiento.
-- **Registro**: conjunto de campos que describen una entidad. Ejemplo: los datos de un alumno.
+- **Registro (o tupla)**: cada fila de una tabla, conjunto de campos que describen una entidad. Ejemplo: los datos de un alumno. Ejemplo: los datos de un alumno.
 - **Tabla**: colección de registros organizados en filas y columnas. Ejemplo: tabla Alumnos con campos DNI, Nombre, Curso.
-- **Campo clave**: Es un campo especial que identifica de forma única cada registro. Ejemplo: el DNI es un campo único en una tabla de alumnos. 
+- **Campo clave o clave primaria**: Es un campo especial que identifica de forma única cada registro. Ejemplo: el DNI es clave primaria en una tabla de alumnos y CódigoCliente es clave primaria en una tabla de clientes. 
+- **Clave foránea**: campo que hace referencia a la clave primaria de otra tabla, estableciendo una relación entre entidades. Ejemplo: CódigoCliente en la tabla Facturas.
+- **Entidad**: todo aquello de lo que interesa guardar datos. Ejemplo: Cliente, Producto, Factura.
+- **Relación**: vínculo entre entidades a través de claves foráneas.
+- **Metadatos**: datos sobre los datos. Incluyen el tipo, nombre, longitud, restricciones, etc.
 
 ![Conceptos básicos de las basees de datos](./img/ConceptosBD.jpg)
 
@@ -256,27 +258,27 @@ Un SGBD está formado por varios componentes que trabajan conjuntamente:
 - **Memoria intermedia** (buffer): almacena temporalmente los datos más usados para mejorar el rendimiento.
 - **Diccionario de datos**: contiene información sobre la estructura de la base de datos (tablas, campos, relaciones, restricciones).
 
-> Ejemplo visual: el procesador de consultas traduce una instrucción SELECT en una serie de pasos que el motor ejecuta, accediendo a los datos a través del gestor de almacenamiento y utilizando el buffer para acelerar el proceso.
+> **Ejemplo**: el _procesador de consultas_ traduce una instrucción SELECT en una serie de pasos que el _motor_ ejecuta, accediendo a los datos a través del _gestor de almacenamiento_ y utilizando el _buffer_ para acelerar el proceso. Conoceremos en detalle la función SELECT en próximas unidades.
 
 ### 3.3 Tipos de SGBD
 Los SGBD se pueden clasificar según distintos criterios:
 
 a) Por modelo de datos
-- Relacionales: basados en tablas y relaciones. Ejemplo: MySQL, PostgreSQL, Oracle.
-- Objeto-relacionales: combinan tablas con estructuras orientadas a objetos. Ejemplo: Oracle, SQL Server.
-- Orientados a objetos: almacenan objetos completos. Ejemplo: db4o, ObjectDB.
-- NoSQL: diseñados para datos no estructurados o semiestructurados. Ejemplo: MongoDB, Cassandra.
+- **Relacionales**: basados en tablas y relaciones. Ejemplo: MySQL, PostgreSQL, Oracle.
+- **Objeto-relacionales**: combinan tablas con estructuras orientadas a objetos. Ejemplo: Oracle, SQL Server.
+- **Orientados a objetos**: almacenan objetos completos. Ejemplo: db4o, ObjectDB.
+- **NoSQL**: diseñados para datos no estructurados o semiestructurados. Ejemplo: MongoDB, Cassandra.
 
 b) Por uso
-- Ofimáticos: pensados para uso personal o en pequeñas organizaciones. Ejemplo: Microsoft Access, LibreOffice Base.
-- Corporativos: diseñados para entornos empresariales con grandes volúmenes de datos y múltiples usuarios. Ejemplo: Oracle, IBM DB2, SAP Sybase.
+- **Ofimáticos**: pensados para uso personal o en pequeñas organizaciones. Ejemplo: Microsoft Access, LibreOffice Base.
+- **Corporativos**: diseñados para entornos empresariales con grandes volúmenes de datos y múltiples usuarios. Ejemplo: Oracle, IBM DB2, SAP Sybase.
 
 c) Por arquitectura
-- Centralizados: toda la base de datos reside en un único servidor.
-- Distribuidos: los datos se reparten entre varios servidores.
-- En la nube: servicios gestionados por terceros, accesibles desde cualquier lugar. Ejemplo: Amazon RDS, Google Cloud SQL.
+- **Centralizados**: toda la base de datos reside en un único servidor.
+- **Distribuidos**: los datos se reparten entre varios servidores.
+- **En la nube**: servicios gestionados por terceros, accesibles desde cualquier lugar. Ejemplo: Amazon RDS, Google Cloud SQL.
 
-> Actividad sugerida: Investiga qué tipo de SGBD utiliza una aplicación que conozcas (por ejemplo, Moodle, WordPress, una app móvil) y clasifícalo según su modelo y arquitectura.
+> Investiga qué tipo de SGBD utilizan varias aplicaciones que conozcas (por ejemplo, Moodle, WordPress, una app móvil) y clasifícalo según su modelo y arquitectura.
 
 ## 4. Bases de Datos Centralizadas y Distribuidas
 La forma en que se almacena y se accede a la información en una base de datos puede variar según la arquitectura del sistema. Esta arquitectura influye directamente en aspectos como el rendimiento, la escalabilidad, la seguridad y la disponibilidad de los datos.
@@ -294,10 +296,10 @@ Una base de datos centralizada es aquella en la que toda la información se alma
 - Problemas de rendimiento si hay muchos usuarios concurrentes.
 - Dificultades para escalar en entornos distribuidos o geográficamente dispersos.
 
-> Ejemplo práctico: una base de datos de una biblioteca escolar que se gestiona desde un único ordenador en la sala de profesores.
+> **Ejemplo**: la base de datos de una biblioteca escolar que se gestiona desde un único ordenador en la sala de profesores.
 
 ### 4.2 Bases de datos distribuidas
-Una base de datos distribuida es aquella en la que los datos se almacenan en varios servidores conectados entre sí mediante una red. Cada servidor puede contener una parte de la base de datos o una copia completa, dependiendo del modelo de distribución.
+Una base de datos distribuida es aquella en la que los datos se almacenan en **varios servidores conectados entre sí** mediante una red. Cada servidor puede contener una parte de la base de datos o una copia completa, dependiendo del modelo de distribución.
 
 ✅ Ventajas:
 - Mayor disponibilidad: si un nodo falla, otros pueden seguir funcionando.
@@ -309,39 +311,39 @@ Una base de datos distribuida es aquella en la que los datos se almacenan en var
 - Necesidad de sincronización entre nodos.
 - Riesgo de inconsistencias si no se gestiona correctamente la concurrencia.
 
-> Ejemplo práctico: una empresa con sedes en distintas ciudades que almacena los datos de cada oficina en servidores locales, pero sincronizados entre sí para mantener una visión global.
+> **Ejemplo**: una empresa con sedes en distintas ciudades que almacena los datos de cada oficina en servidores locales, pero sincronizados entre sí para mantener una visión global.
 
-### 4.3 Modelos relacionados
+### 4.3 Otros modelos de basess de datos
 Además de las bases de datos centralizadas y distribuidas, existen otros modelos que complementan esta clasificación:
-- Bases de datos reflejadas: se mantiene una copia exacta de la base de datos en varios servidores, lo que mejora la disponibilidad y la seguridad ante fallos.
-- Bases de datos locales: el acceso se realiza desde el mismo equipo que almacena la base de datos, sin necesidad de red.
+- **Bases de datos reflejadas**: se mantiene una copia exacta de la base de datos en varios servidores, lo que mejora la disponibilidad y la seguridad ante fallos.
+- **Bases de datos locales**: el acceso se realiza desde el mismo equipo que almacena la base de datos, sin necesidad de red.
 
-> Actividad sugerida
-Dibuja un esquema comparativo entre una base de datos centralizada y una distribuida. Indica cómo se accede a los datos en cada caso, qué sucede si un servidor falla y qué ventajas ofrece cada modelo en distintos contextos (educativo, empresarial, científico).
+> Razona si una base de datos reflejada y una local son bases de datos centralizadas o distribuídas.
 
 ## 5. Modelo de Capas
 El modelo de capas en los sistemas gestores de bases de datos (SGBD) describe cómo se organiza y accede a la información desde distintos niveles de abstracción. Este modelo permite separar la forma en que los datos se almacenan físicamente de cómo se ven y utilizan por parte de los usuarios y aplicaciones.
 
 ### 5.1 Arquitectura ANSI-SPARC: los tres niveles
-La arquitectura propuesta por ANSI-SPARC en 1975 define tres niveles de visión de una base de datos:
+La [arquitectura propuesta por ANSI-SPARC](https://es.wikipedia.org/wiki/Arquitectura_ANSI-SPARC) en 1975 define tres niveles de visión de una base de datos:
 
-- **Nivel interno** (físico)
-  - Describe cómo se almacenan los datos en el sistema de almacenamiento (disco, SSD, etc.).
-  - Incluye estructuras como árboles B+, índices, montones, particiones, etc.
-  - Cada SGBD implementa este nivel de forma propia y no estandarizada.
-- **Nivel conceptual** (lógico)
-  - Representa la estructura lógica de la base de datos: entidades, atributos, relaciones y restricciones.
-  - Es independiente de cómo se almacenan físicamente los datos.
-  - Es el esquema general que define toda la base de datos.
+![Arquitectura ANSI-SPARC](./img/modeloCapas.jpg)
+
 - **Nivel externo** (de vistas)
   - Define cómo los usuarios o aplicaciones ven los datos.
   - Cada vista puede mostrar solo una parte de la base de datos, ocultando información sensible o irrelevante.
   - Permite personalizar el acceso según el perfil del usuario.
+- **Nivel conceptual** (lógico)
+  - Representa la estructura lógica de la base de datos: entidades, atributos, relaciones y restricciones.
+  - Es independiente de cómo se almacenan físicamente los datos.
+  - Es el esquema general que define toda la base de datos.
+- **Nivel interno** (físico)
+  - Describe cómo se almacenan los datos en el sistema de almacenamiento (disco, SSD, etc.).
+  - Incluye estructuras como árboles B+, índices, montones, particiones, etc.
+  - Cada SGBD implementa este nivel de forma propia y no estandarizada.
 
-> Ejemplo práctico: un profesor puede ver los datos de sus alumnos (vista externa), mientras que el administrador del sistema tiene acceso completo al esquema lógico (nivel conceptual), y el sistema operativo gestiona cómo se almacenan los datos en disco (nivel interno).
+> **Ejemplo**: un profesor puede ver los datos de sus alumnos (vista externa), mientras que el administrador del sistema tiene acceso completo al esquema lógico (nivel conceptual), y el sistema operativo gestiona cómo se almacenan los datos en disco (nivel interno).
 
-### 5.2 Independencia de los datos
-Gracias a esta arquitectura, se consigue:
+Gracias a esta arquitectura, se consigue la **independencia de los datos**, lo que conlleva:
 - Independencia lógica: se pueden modificar el esquema conceptual (añadir atributos, relaciones, restricciones) sin afectar las vistas ni los programas de aplicación.
 - Independencia física: se pueden cambiar las estructuras de almacenamiento (índices, particiones, ubicación en disco) sin afectar el esquema lógico ni las vistas.
 
@@ -349,39 +351,57 @@ Gracias a esta arquitectura, se consigue:
 “La independencia de los datos es la inmunidad de las aplicaciones ante cambios en la estructura del almacenamiento y en los métodos de acceso.”
                           Definición de C.J. Date (1981)
 ```
-
-### 5.3 Modelo funcional de cinco capas
-Además de los tres niveles de abstracción, los SGBD modernos operan siguiendo un modelo funcional de cinco capas que describe el flujo de una consulta desde el usuario hasta el sistema operativo:
-- Facilidades de usuario: interfaces gráficas, formularios, asistentes, etc.
+### 5.2 Modelo funcional de cinco capas
+Además de los tres niveles de abstracción, los SGBD modernos operan siguiendo un modelo funcional de cinco capas que describe el flujo de una consulta desde el usuario hasta el sistema operativo. Este modelo tiene las siguientes caracterísitcas:
+- Facilidades para el usuario: interfaces gráficas, formularios, asistentes, etc.
 - Capa de acceso a datos: traduce las peticiones del usuario a instrucciones comprensibles por el sistema.
 - Diccionario de datos: interpreta las solicitudes en función del esquema interno.
 - Núcleo del SGBD: traduce las instrucciones para que el sistema operativo pueda ejecutarlas.
 - Sistema operativo: accede físicamente a los datos en el dispositivo de almacenamiento.
 
-> Ejemplo: cuando un usuario realiza una consulta SQL (SELECT * FROM Alumnos WHERE Curso = 'ASIR'), esta pasa por todas las capas hasta que el sistema operativo recupera los datos y los devuelve al usuario.
+En base a esos tres niveles de visión de las bases de datos, los SGBD realizan todos los procesos operando conforme a un modelo de cinco capas:
+![Modelo de 5 capas](./img/modelo5Capas.jpg)
 
-> Actividad sugerida
-Dibuja un esquema que represente los tres niveles de abstracción y las cinco capas funcionales de un SGBD. Explica con tus propias palabras qué ocurre cuando un usuario realiza una consulta y cómo se procesan los datos desde la capa más alta hasta el almacenamiento físico.
+De este modo, el esquema de procesamiento en una petición de usuario al SGBD
+según el modelo de capas es el siguiente:
+
+![Esquema del proceso de peticiones de un SGBD](./img/procesoPeticionSGBD.jpg)
+
+## 6. Lenguaje SQL
+El lenguaje SQL (Structured Query Language) es el estándar para interactuar con bases de datos relacionales. Permite:
+- Definir estructuras (tablas, relaciones, tipos de datos).
+- Manipular datos (consultas, inserciones, modificaciones, borrados).
+- Controlar accesos (usuarios, privilegios).
+- Gestionar transacciones (confirmar o deshacer operaciones).
+
+SQL está estandarizado por la ISO y se divide en varios sublenguajes, cada uno con una función específica:
+
+- **Lenguaje DDL** (Data Definition Language): Permite definir la estructura física de la base de datos (tablas, relaciones entre tablas, tipos de datos de las tablas, etc.). DDL (Data Definition Language): Definición de estructuras.
+  - CREATE: Crear tablas, índices, vistas, etc.
+  - ALTER: Modificar estructuras existentes.
+  - DROP: Eliminar objetos de la base de datos.
+
+- **Lenguaje DML** (Data Manipulation Language): Permite consultar y modificar los datos. Se utiliza para realizar consultas, inserciones, borrados y modificaciones de los datos. Las principales instrucciones son: 
+  - SELECT: Consulta de datos.
+  - INSERT: Inserción de registros.
+  - UPDATE: Modificación de registros.
+  - DELETE: Eliminación de registros.
+
+- **Lenguaje DCL** (Data Control Language): Se usa para controlar la seguridad, integridad y privacidad de las bases de datos (crear usuarios, definir privilegios de usuario, dar permisos sobre tablas, establecer mecanismos de recuperación de la información, etc.). 
+  - GRANT: Conceder permisos.
+  - REVOKE: Revocar permisos.
+
+- Lenguaje TCL (Transaction Control Language): Se utiliza para el control de transacciones.
+  
+  Una transacción es un conjunto de operaciones que deben ejecutarse como una unidad. Las propiedades ACID garantizan su fiabilidad: Atomicidad (todo o nada), Consistencia (coherencia), Aislamiento (independencia), Durabilidad (persistencia).
+
+  Las principales instrucciones son:
+  - COMMIT: Confirmar cambios.
+  - ROLLBACK: Deshacer cambios.
 
 
 __________________________________________
 
-
-## 6. Lenguaje SQL
-SQL es el lenguaje estándar para interactuar con bases de datos relacionales. Permite definir estructuras, manipular datos, controlar accesos y gestionar transacciones.
-
-Se divide en sublenguajes: DML (SELECT, INSERT, UPDATE, DELETE), DDL (CREATE, ALTER, DROP), DCL (GRANT, REVOKE), TCL (COMMIT, ROLLBACK).
-
-Ejemplos: creación de tablas con restricciones, inserción de datos, consultas con condiciones, actualizaciones y borrado de registros.
-
-**Actividad:** Crea tablas con restricciones y realiza consultas. Investiga el concepto de SQL Injection y cómo prevenirlo.
-
-## 7. Transacciones y ACID
-Una transacción es un conjunto de operaciones que deben ejecutarse como una unidad. Las propiedades ACID garantizan su fiabilidad: Atomicidad (todo o nada), Consistencia (coherencia), Aislamiento (independencia), Durabilidad (persistencia).
-
-Los SGBD permiten definir transacciones, controlar errores y asegurar que los cambios se confirmen (COMMIT) o se cancelen (ROLLBACK).
-
-**Actividad:** Simula una transferencia entre cuentas con instrucciones SQL que incluyan COMMIT y ROLLBACK.
 
 ## 8. Diseño de Bases de Datos
 Un mal diseño puede provocar redundancia, contradicciones, pérdida de información y problemas de integridad. La normalización y el uso adecuado de claves primarias y foráneas ayudan a evitar estos problemas.
