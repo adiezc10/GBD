@@ -226,37 +226,35 @@ La ubicación física de una base de datos influye en su accesibilidad, rendimie
 
 > Ejemplo práctico: una empresa con oficinas en Madrid, Barcelona y Valencia puede tener una base de datos distribuida, donde cada sede gestiona sus propios datos, pero todos están sincronizados.
 
-**Actividad:** Diseña una tabla simulada en papel con campos y registros.
-
 ## 3. Sistemas Gestores de Bases de Datos (SGBD)
 Un **Sistema Gestor de Bases de Datos (SGBD)** es un conjunto de programas que permite crear, administrar y utilizar bases de datos de forma eficiente. Su aparición supuso una mejora significativa respecto al uso de ficheros, al ofrecer mecanismos para garantizar la integridad, seguridad y accesibilidad de los datos, incluso en entornos multiusuario y distribuidos.
 
 ### 3.1 Funciones de un SGBD
 Las funciones de un SGBD pueden variar según el tipo y el fabricante, pero en general incluyen:
 
-- Almacenamiento, acceso y actualización de datos: permite a los usuarios realizar operaciones como insertar, modificar, eliminar y consultar datos.
-- Garantía de integridad: asegura que los datos cumplen ciertas reglas (por ejemplo, que una fecha no sea anterior a hoy).
-- Seguridad: controla qué usuarios pueden acceder a qué datos y qué operaciones pueden realizar.
-- Concurrencia: permite que varios usuarios accedan simultáneamente a la base de datos sin interferencias.
-- Gestión de transacciones: agrupa operaciones en bloques que se ejecutan como una unidad (con propiedades ACID: atomicidad, consistencia, aislamiento, durabilidad).
-- Independencia de los datos: los datos están separados de las aplicaciones que los usan, lo que facilita su mantenimiento.
-- Recuperación ante fallos: incluye mecanismos para restaurar la base de datos en caso de errores o caídas del sistema.
-- Diccionario de datos: almacena metadatos sobre la estructura de la base de datos.
-- Estadísticas y auditoría: registra operaciones realizadas, errores, accesos, etc.
+- **Almacenamiento, acceso y actualización de datos**: permite a los usuarios realizar operaciones como insertar, modificar, eliminar y consultar datos.
+- Garantía de **integridad**: asegura que los datos cumplen ciertas reglas (por ejemplo, que una fecha no sea anterior a hoy).
+- **Seguridad**: controla qué usuarios pueden acceder a qué datos y qué operaciones pueden realizar.
+- **Concurrencia**: permite que varios usuarios accedan simultáneamente a la base de datos sin interferencias.
+- **Gestión de transacciones**: agrupa operaciones en bloques que se ejecutan como una unidad (con propiedades ACID: atomicidad, consistencia, aislamiento, durabilidad).
+- **Independencia de los datos**: los datos están separados de las aplicaciones que los usan, lo que facilita su mantenimiento.
+- **Recuperación** ante fallos: incluye mecanismos para restaurar la base de datos en caso de errores o caídas del sistema.
+- **Diccionario de datos**: almacena metadatos sobre la estructura de la base de datos.
+- **Estadísticas y auditoría**: registra operaciones realizadas, errores, accesos, etc.
 
-> Ejemplo práctico: en una base de datos de una tienda online, el SGBD garantiza que dos usuarios no puedan comprar el mismo producto si solo queda una unidad disponible, gracias a la gestión de concurrencia y transacciones.
+> **Ejemplo**: en una base de datos de una tienda online, el SGBD garantiza que dos usuarios no puedan comprar el mismo producto si solo queda una unidad disponible, gracias a la gestión de concurrencia y transacciones (vemos el concepto a continuación).
 
 ### 3.2 Componentes de un SGBD
 Un SGBD está formado por varios componentes que trabajan conjuntamente:
-- Procesador de consultas: interpreta las instrucciones SQL y genera un plan de ejecución.
-- Motor de ejecución: realiza las operaciones solicitadas sobre los datos.
-- Gestor de transacciones: asegura que las operaciones agrupadas se ejecuten correctamente.
-- Gestor de concurrencia: controla el acceso simultáneo a los datos.
-- Gestor de recuperación: permite restaurar la base de datos tras un fallo.
-- Gestor de almacenamiento: organiza los datos en disco y gestiona el espacio.
-- Gestor de archivos: interactúa con el sistema operativo para acceder a los ficheros físicos.
-- Memoria intermedia (buffer): almacena temporalmente los datos más usados para mejorar el rendimiento.
-- Diccionario de datos: contiene información sobre la estructura de la base de datos (tablas, campos, relaciones, restricciones).
+- **Procesador de consultas**: interpreta las instrucciones SQL y genera un plan de ejecución.
+- **Motor de ejecución**: realiza las operaciones solicitadas sobre los datos.
+- **Gestor de transacciones**: asegura que las operaciones agrupadas se ejecuten correctamente.
+- **Gestor de concurrencia**: controla el acceso simultáneo a los datos.
+- **Gestor de recuperación**: permite restaurar la base de datos tras un fallo.
+- **Gestor de almacenamiento**: organiza los datos en disco y gestiona el espacio.
+- **Gestor de archivos**: interactúa con el sistema operativo para acceder a los ficheros físicos.
+- **Memoria intermedia** (buffer): almacena temporalmente los datos más usados para mejorar el rendimiento.
+- **Diccionario de datos**: contiene información sobre la estructura de la base de datos (tablas, campos, relaciones, restricciones).
 
 > Ejemplo visual: el procesador de consultas traduce una instrucción SELECT en una serie de pasos que el motor ejecuta, accediendo a los datos a través del gestor de almacenamiento y utilizando el buffer para acelerar el proceso.
 
