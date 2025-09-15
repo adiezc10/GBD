@@ -22,9 +22,7 @@ Esta unidad tiene como objetivo introducir los conceptos básicos relacionados c
     - [5.1 Arquitectura ANSI-SPARC: los tres niveles](#51-arquitectura-ansi-sparc-los-tres-niveles)
     - [5.2 Modelo funcional de cinco capas](#52-modelo-funcional-de-cinco-capas)
   - [6. Lenguaje SQL](#6-lenguaje-sql)
-  - [8. Diseño de Bases de Datos](#8-diseño-de-bases-de-datos)
-  - [9. Tipos de Usuarios](#9-tipos-de-usuarios)
-  - [10. Actividades de aprendizaje](#10-actividades-de-aprendizaje)
+  - [7. Actividades de aprendizaje](#7-actividades-de-aprendizaje)
 
 ## 0. Introducción
 En el contexto de los sistemas informáticos, el almacenamiento de la información es un aspecto fundamental que ha evolucionado desde simples estructuras de ficheros hasta complejos sistemas de bases de datos. 
@@ -205,19 +203,23 @@ Tipos de bases de datos según el modelo de datos:
 
 ![Ejemplo de base de datos relacional](./img/bd_relacional.jpg)
 
+- **No relacionales** o **NoSQL**, son sistemas de almacenamiento de datos que no utilizan el modelo tabular de filas y columnas de las bases de datos relacionales tradicionales. Se caracterizan por sus estructuras flexibles y esquemas dinámicos, adaptándose mejor a grandes volúmenes de datos no estructurados o semiestructurados. Ofrecen alta escalabilidad y rendimiento, lo que las hace ideales para aplicaciones web modernas, redes sociales y Big Data, aunque suelen sacrificar la consistencia ACID por la velocidad y escalabilidad horizontal. Dentro de las bases de datos no relacionales encontramos las siguientes:
+  - **Documentales**: almacenan datos semiestructurados como JSON o XML. Ejemplo: MongoDB.
+  - Clave-valor: como Redis, DynamoDB.
+  - Columnar: como Cassandra, HBase.
+  - Grafos: como Neo4j, OrientDB.
+
+  ![Ejemplo de base de datos documental](./img/bd_mongoDB.png)
+
 - **Orientadas a objetos**: permiten almacenar objetos completos con sus atributos y métodos.
 
 ![Ejemplo de base de datos orientada a objetos](./img/bd_orientadaObjetos.png)
 
 - **Objeto-relacionales**: combinan características de las relacionales y orientadas a objetos.
-- **Documentales**: almacenan datos semiestructurados como JSON o XML. Ejemplo: MongoDB.
-
-![Ejemplo de base de datos documental](./img/bd_mongoDB.png)
 
 - **Multidimensionales**: usadas en inteligencia de negocio (OLAP).
 
 ![Ejemplo de base de datos multidimensional](./img/bd_multidimensional.png)
-- **Deductivas**: permiten realizar inferencias a partir de reglas lógicas.
 
 ### 2.3 Ubicación de la información
 La ubicación física de una base de datos influye en su accesibilidad, rendimiento y seguridad. Existen varios modelos:
@@ -368,7 +370,11 @@ según el modelo de capas es el siguiente:
 ![Esquema del proceso de peticiones de un SGBD](./img/procesoPeticionSGBD.jpg)
 
 ## 6. Lenguaje SQL
-El lenguaje SQL (Structured Query Language) es el estándar para interactuar con bases de datos relacionales. Permite:
+El lenguaje [SQL](https://es.wikipedia.org/wiki/SQL) (Structured Query Language traducido como lenguaje de consulta estructurada) es el estándar para interactuar con bases de datos relacionales. Es uno de los lenguajes más usados en el entorno profesional y de los más estudiados (consultar [survey.stackoverflow.co](https://survey.stackoverflow.co/2024/technology#most-popular-technologies-language-prof)). Es importante saber que no se trata de un lenguaje de programación sinó de programación sinó de un **lenguaje de consulta**. 
+
+![Tecnologías más utilizadas en 2024 según survey.stackoverflow.co](./img/survey.stackoverflow.jpg)
+
+SQL permite:
 - Definir estructuras (tablas, relaciones, tipos de datos).
 - Manipular datos (consultas, inserciones, modificaciones, borrados).
 - Controlar accesos (usuarios, privilegios).
@@ -399,23 +405,7 @@ SQL está estandarizado por la ISO y se divide en varios sublenguajes, cada uno 
   - COMMIT: Confirmar cambios.
   - ROLLBACK: Deshacer cambios.
 
-
-__________________________________________
-
-
-## 8. Diseño de Bases de Datos
-Un mal diseño puede provocar redundancia, contradicciones, pérdida de información y problemas de integridad. La normalización y el uso adecuado de claves primarias y foráneas ayudan a evitar estos problemas.
-
-Relaciones entre tablas: 1 a 1, 1 a n, n a n. Las relaciones n a n requieren tablas intermedias. Las claves primarias identifican registros únicos; las claves foráneas establecen vínculos entre tablas.
-
-**Actividad:** Analiza un caso de mala estructuración y propón una solución con tablas intermedias.
-
-## 9. Tipos de Usuarios
-Los usuarios de una base de datos se clasifican según su interacción: normales (uso básico), programadores (desarrollan aplicaciones), sofisticados (consultas avanzadas), especializados (aplicaciones no tradicionales), administradores (gestión del sistema).
-
-**Actividad:** Identifica roles en un sistema real y describe sus funciones.
-
-## 10. Actividades de aprendizaje
+## 7. Actividades de aprendizaje
 Se recomienda realizar prácticas con Access o LibreOffice Base: crear tablas, establecer relaciones, diseñar formularios, generar informes, ejecutar consultas.
 
 **Actividad:** Realiza una práctica guiada con Access que incluya creación de tablas, relaciones y consultas.
