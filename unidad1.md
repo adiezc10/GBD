@@ -158,6 +158,8 @@ Las bases de datos son una evolución natural de los sistemas de almacenamiento 
 
 Una base de datos no es solo un conjunto de datos, sino una estructura diseñada para facilitar su uso por múltiples usuarios y aplicaciones, manteniendo la integridad, la coherencia y la disponibilidad de la información.
 
+![](./img/esquemaDB.png)
+
 ### 2.1 Conceptos
 A continuación se definen los principales elementos que componen una base de datos:
 - **Dato**: unidad mínima de información. Es un hecho conocido que puede registrarse y tiene un significado implícito Ejemplo: 2025, Madrid, Juan.
