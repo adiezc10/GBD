@@ -8,8 +8,9 @@ Esta unidad tiene como objetivo introducir los conceptos básicos relacionados c
     - [1.2 Problemas de los sistemas basados en ficheros](#12-problemas-de-los-sistemas-basados-en-ficheros)
   - [2. Bases de Datos](#2-bases-de-datos)
     - [2.1 Conceptos](#21-conceptos)
-    - [2.2 Usos y tipos según el modelo de datos](#22-usos-y-tipos-según-el-modelo-de-datos)
-    - [2.3 Ubicación de la información](#23-ubicación-de-la-información)
+    - [2.2 ACID](#22-acid)
+    - [2.3 Usos y tipos según el modelo de datos](#23-usos-y-tipos-según-el-modelo-de-datos)
+    - [2.4 Ubicación de la información](#24-ubicación-de-la-información)
   - [3. Sistemas Gestores de Bases de Datos (SGBD)](#3-sistemas-gestores-de-bases-de-datos-sgbd)
     - [3.1 Funciones de un SGBD](#31-funciones-de-un-sgbd)
     - [3.2 Componentes de un SGBD](#32-componentes-de-un-sgbd)
@@ -151,8 +152,6 @@ Aunque los ficheros son útiles para almacenar información, presentan varias li
 
 Este ejemplo muestra cómo el uso de ficheros como sistema de almacenamiento puede generar errores, duplicidades y dificultades de gestión. Las bases de datos permiten evitar estos problemas.
 
-> Actividades de aprendizaje 
-
 ## 2. Bases de Datos
 Las bases de datos son una evolución natural de los sistemas de almacenamiento de información. Frente a las limitaciones de los ficheros tradicionales, las bases de datos permiten organizar, acceder y gestionar grandes volúmenes de información de forma eficiente, segura y estructurada.
 
@@ -163,19 +162,34 @@ Una base de datos no es solo un conjunto de datos, sino una estructura diseñada
 ### 2.1 Conceptos
 A continuación se definen los principales elementos que componen una base de datos:
 - **Dato**: unidad mínima de información. Es un hecho conocido que puede registrarse y tiene un significado implícito Ejemplo: 2025, Madrid, Juan.
-- **Tipo de dato**: define la naturaleza del dato. Ejemplos: texto, número entero, fecha, booleano.
 - **Campo**: conjunto de datos del mismo tipo que representan una característica. Ejemplo: Nombre, Fecha de nacimiento.
 - **Registro (o tupla)**: cada fila de una tabla, conjunto de campos que describen una entidad. Ejemplo: los datos de un alumno. Ejemplo: los datos de un alumno.
 - **Tabla**: colección de registros organizados en filas y columnas. Ejemplo: tabla Alumnos con campos DNI, Nombre, Curso.
+
+![Conceptos básicos de las basees de datos](./img/ConceptosBD.jpg)
+
+- **Tipo de dato**: define la naturaleza del dato. Ejemplos: texto, número entero, fecha, booleano.
+  - **Texto**: `VARCHAR`, `TEXT`, `CHAR`
+  - **Numéricos**: `INT`, `FLOAT`, `BIGINT`
+  - **Fechas**: `DATE`, `DATETIME`, `TIMESTAMP`
+  - **Booleanos**: `BOOLEAN`, `TINYINT(1)`
 - **Campo clave o clave primaria**: Es un campo especial que identifica de forma única cada registro. Ejemplo: el DNI es clave primaria en una tabla de alumnos y CódigoCliente es clave primaria en una tabla de clientes. 
 - **Clave foránea**: campo que hace referencia a la clave primaria de otra tabla, estableciendo una relación entre entidades. Ejemplo: CódigoCliente en la tabla Facturas.
 - **Entidad**: todo aquello de lo que interesa guardar datos. Ejemplo: Cliente, Producto, Factura.
 - **Relación**: vínculo entre entidades a través de claves foráneas.
-- **Metadatos**: datos sobre los datos. Incluyen el tipo, nombre, longitud, restricciones, etc.
+  - **Uno a uno (1:1)**: Un alumno tiene una única matrícula.
+  - **Uno a muchos (1:N)**: Una empresa tiene muchos empleados.
+  - **Muchos a muchos (N:M)**: Un usuario puede conocer varios lenguajes de programación.
+  - **Autorreferencia**: Una fila se relaciona consigo misma (ej. jefe de un empleado).
 
-![Conceptos básicos de las basees de datos](./img/ConceptosBD.jpg)
+![Conceptos BD](./img/ConceptosBD2.jpg)
+
+> **Ejemplo**: en una base de datos escolar, podríamos tener una tabla Alumnos con campos como DNI, Nombre, Apellidos, Fecha de nacimiento y módulos, y otra tabla Módulos relacionada con la matrícula de cada alumno.
+
+![](./img/ejemploDB.png)
 
 Otros conceptos: 
+- **Metadatos**: datos sobre los datos. Incluyen el tipo, nombre, longitud, restricciones, etc.
 - **Consulta**: instrucción que permite recuperar información de la base de datos según ciertos criterios.
 - **Índice**: estructura que acelera la búsqueda de registros en una tabla.
 - **Vista**: tabla virtual generada a partir de una o varias tablas, útil para mostrar solo ciertos datos.
@@ -183,9 +197,31 @@ Otros conceptos:
 - **Scripts o guiones**: conjunto de instrucciones que automatizan tareas sobre la base de datos.
 - **Procedimientos**: son un tipo especial de script que se encuentra almacenado en la base de datos.
 
-> **Ejemplo**: en una base de datos escolar, podríamos tener una tabla Alumnos con campos como DNI, Nombre, Apellidos, Fecha de nacimiento, y otra tabla Matriculaciones que relaciona alumnos con módulos.
+> Actividad 1: Conceptos de bases de datos
 
-### 2.2 Usos y tipos según el modelo de datos
+### 2.2 ACID
+En el contexto de las bases de datos, ACID es un acrónimo que representa cuatro propiedades (Atomicidad, Consistencia, Aislamiento y Durabilidad) que aseguran la fiabilidad e integridad de las transacciones de la base de datos. Estas propiedades garantizan que un conjunto de operaciones se ejecute de manera segura y que los datos se mantengan en un estado válido, incluso frente a errores o fallas del sistema. 
+
+Las cuatro propiedades ACID:
+1. **Atomicidad** (Atomicity):
+Se refiere al principio de "todo o nada". Si una transacción tiene múltiples pasos, o todos se completan con éxito, o ninguno de ellos se realiza, revirtiendo cualquier cambio. 
+2. **Consistencia** (Consistency):
+Asegura que cualquier transacción lleva la base de datos de un estado válido a otro estado válido. Esto significa que la integridad de los datos se mantiene, y las reglas y restricciones definidas por la base de datos se cumplen. 
+3. **Aislamiento** (Isolation):
+Garantiza que, cuando múltiples transacciones se ejecutan simultáneamente, cada una opera de manera independiente y no interfiere con las otras. El estado intermedio de una transacción no es visible para otras. 
+4. **Durabilidad** (Durability):
+Una vez que una transacción se confirma (commits), sus cambios son permanentes y se mantienen incluso si hay una falla de alimentación, un error o una caída del sistema. 
+
+Importancia de ACID:
+- **Integridad de los datos**: Las propiedades ACID son fundamentales para mantener la exactitud y validez de la información en la base de datos. 
+- **Fiabilidad**: Son cruciales para aplicaciones donde la precisión de los datos es crítica, como en sistemas bancarios o de reservas. 
+- **Gestión de transacciones**: Permiten a las bases de datos gestionar operaciones complejas de forma segura, asegurando la continuidad del negocio. 
+
+Ejemplos de su aplicación: 
+- Sistemas bancarios: Aseguran que las transferencias de dinero sean completas, correctas y permanentes. 
+- Sistemas de reservas: Garantizan que un asiento reservado no pueda ser reservado por dos usuarios simultáneamente. 
+
+### 2.3 Usos y tipos según el modelo de datos
 
 Las bases de datos se utilizan en prácticamente todos los ámbitos de la sociedad:
 - **Administración**: gestión de clientes, facturas, productos, empleados.
@@ -205,7 +241,7 @@ Tipos de bases de datos según el modelo de datos:
 
 ![Ejemplo de base de datos relacional](./img/bd_relacional.jpg)
 
-- **No relacionales** o **NoSQL**, son sistemas de almacenamiento de datos que no utilizan el modelo tabular de filas y columnas de las bases de datos relacionales tradicionales. Se caracterizan por sus estructuras flexibles y esquemas dinámicos, adaptándose mejor a grandes volúmenes de datos no estructurados o semiestructurados. Ofrecen alta escalabilidad y rendimiento, lo que las hace ideales para aplicaciones web modernas, redes sociales y Big Data, aunque suelen sacrificar la consistencia ACID por la velocidad y escalabilidad horizontal. Dentro de las bases de datos no relacionales encontramos las siguientes:
+- **No relacionales** o **NoSQL**, son sistemas de almacenamiento de datos que no utilizan el modelo tabular de filas y columnas de las bases de datos relacionales. Se caracterizan por sus **estructuras flexibles** y esquemas dinámicos, adaptándose mejor a grandes volúmenes de datos no estructurados o semiestructurados. Ofrecen alta escalabilidad y rendimiento, lo que las hace ideales para aplicaciones web modernas, redes sociales y Big Data, aunque suelen sacrificar la consistencia ACID por la velocidad y escalabilidad horizontal. Dentro de las bases de datos no relacionales encontramos las siguientes:
   - **Documentales**: almacenan datos semiestructurados como JSON o XML. Ejemplo: MongoDB.
   - Clave-valor: como Redis, DynamoDB.
   - Columnar: como Cassandra, HBase.
@@ -223,7 +259,7 @@ Tipos de bases de datos según el modelo de datos:
 
 ![Ejemplo de base de datos multidimensional](./img/bd_multidimensional.png)
 
-### 2.3 Ubicación de la información
+### 2.4 Ubicación de la información
 La ubicación física de una base de datos influye en su accesibilidad, rendimiento y seguridad. Existen varios modelos:
 - **Local**: la base de datos se encuentra en el mismo equipo que la aplicación. Ejemplo: una base de datos en Access.
 - **En servidor**: la base de datos reside en un servidor y se accede desde otros equipos a través de una red local o Internet.
@@ -231,6 +267,7 @@ La ubicación física de una base de datos influye en su accesibilidad, rendimie
 - **Reflejada**: se mantiene una copia exacta de la base de datos en varios servidores para garantizar disponibilidad y seguridad.
 
 > Ejemplo práctico: una empresa con oficinas en Madrid, Barcelona y Valencia puede tener una base de datos distribuida, donde cada sede gestiona sus propios datos, pero todos están sincronizados.
+
 
 ## 3. Sistemas Gestores de Bases de Datos (SGBD)
 Un **Sistema Gestor de Bases de Datos (SGBD)** es un conjunto de programas que permite crear, administrar y utilizar bases de datos de forma eficiente. Su aparición supuso una mejora significativa respecto al uso de ficheros, al ofrecer mecanismos para garantizar la integridad, seguridad y accesibilidad de los datos, incluso en entornos multiusuario y distribuidos.
@@ -283,6 +320,8 @@ c) Por arquitectura
 - **En la nube**: servicios gestionados por terceros, accesibles desde cualquier lugar. Ejemplo: Amazon RDS, Google Cloud SQL.
 
 > Investiga qué tipo de SGBD utilizan varias aplicaciones que conozcas (por ejemplo, Moodle, WordPress, una app móvil) y clasifícalo según su modelo y arquitectura.
+
+> Actividad: Instalación y uso de un SGBD
 
 ## 4. Bases de Datos Centralizadas y Distribuidas
 La forma en que se almacena y se accede a la información en una base de datos puede variar según la arquitectura del sistema. Esta arquitectura influye directamente en aspectos como el rendimiento, la escalabilidad, la seguridad y la disponibilidad de los datos.
@@ -406,6 +445,8 @@ SQL está estandarizado por la ISO y se divide en varios sublenguajes, cada uno 
   Las principales instrucciones son:
   - COMMIT: Confirmar cambios.
   - ROLLBACK: Deshacer cambios.
+
+Como referencias para aprender SQL nos basaremos en la guía de [w3schools.com](https://www.w3schools.com/sql/)
 
 ## 7. Actividades de aprendizaje
 Se recomienda realizar prácticas con Access o LibreOffice Base: crear tablas, establecer relaciones, diseñar formularios, generar informes, ejecutar consultas.
