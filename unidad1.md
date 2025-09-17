@@ -152,10 +152,12 @@ Aunque los ficheros son útiles para almacenar información, presentan varias li
 
 Este ejemplo muestra cómo el uso de ficheros como sistema de almacenamiento puede generar errores, duplicidades y dificultades de gestión. Las bases de datos permiten evitar estos problemas.
 
+> Actividad 1: trabajando con ficheros
+
 ## 2. Bases de Datos
 Las bases de datos son una evolución natural de los sistemas de almacenamiento de información. Frente a las limitaciones de los ficheros tradicionales, las bases de datos permiten organizar, acceder y gestionar grandes volúmenes de información de forma eficiente, segura y estructurada.
 
-Una base de datos no es solo un conjunto de datos, sino una estructura diseñada para facilitar su uso por múltiples usuarios y aplicaciones, manteniendo la integridad, la coherencia y la disponibilidad de la información.
+Una base de datos no es solo un conjunto de datos, sino una **estructura** diseñada para facilitar su uso por múltiples usuarios y aplicaciones, manteniendo la integridad, la coherencia y la disponibilidad de la información.
 
 ![](./img/esquemaDB.png)
 
@@ -163,7 +165,7 @@ Una base de datos no es solo un conjunto de datos, sino una estructura diseñada
 A continuación se definen los principales elementos que componen una base de datos:
 - **Dato**: unidad mínima de información. Es un hecho conocido que puede registrarse y tiene un significado implícito Ejemplo: 2025, Madrid, Juan.
 - **Campo**: conjunto de datos del mismo tipo que representan una característica. Ejemplo: Nombre, Fecha de nacimiento.
-- **Registro (o tupla)**: cada fila de una tabla, conjunto de campos que describen una entidad. Ejemplo: los datos de un alumno. Ejemplo: los datos de un alumno.
+- **Registro (o tupla)**: cada fila de una tabla, conjunto de campos que describen una entidad. Ejemplo: los datos de un alumno.
 - **Tabla**: colección de registros organizados en filas y columnas. Ejemplo: tabla Alumnos con campos DNI, Nombre, Curso.
 
 ![Conceptos básicos de las basees de datos](./img/ConceptosBD.jpg)
@@ -188,7 +190,7 @@ A continuación se definen los principales elementos que componen una base de da
 
 ![](./img/ejemploDB.png)
 
-Otros conceptos: 
+Otros conceptos que urilizaremos en futuras unidades: 
 - **Metadatos**: datos sobre los datos. Incluyen el tipo, nombre, longitud, restricciones, etc.
 - **Consulta**: instrucción que permite recuperar información de la base de datos según ciertos criterios.
 - **Índice**: estructura que acelera la búsqueda de registros en una tabla.
@@ -197,7 +199,7 @@ Otros conceptos:
 - **Scripts o guiones**: conjunto de instrucciones que automatizan tareas sobre la base de datos.
 - **Procedimientos**: son un tipo especial de script que se encuentra almacenado en la base de datos.
 
-> Actividad 1: Conceptos de bases de datos
+> Actividad 2: Conceptos de bases de datos
 
 ### 2.2 ACID
 En el contexto de las bases de datos, ACID es un acrónimo que representa cuatro propiedades (Atomicidad, Consistencia, Aislamiento y Durabilidad) que aseguran la fiabilidad e integridad de las transacciones de la base de datos. Estas propiedades garantizan que un conjunto de operaciones se ejecute de manera segura y que los datos se mantengan en un estado válido, incluso frente a errores o fallas del sistema. 
@@ -321,7 +323,7 @@ c) Por arquitectura
 
 > Investiga qué tipo de SGBD utilizan varias aplicaciones que conozcas (por ejemplo, Moodle, WordPress, una app móvil) y clasifícalo según su modelo y arquitectura.
 
-> Actividad: Instalación y uso de un SGBD
+> Actividad 3: Instalación y uso de un SGBD
 
 ## 4. Bases de Datos Centralizadas y Distribuidas
 La forma en que se almacena y se accede a la información en una base de datos puede variar según la arquitectura del sistema. Esta arquitectura influye directamente en aspectos como el rendimiento, la escalabilidad, la seguridad y la disponibilidad de los datos.
