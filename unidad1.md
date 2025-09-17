@@ -36,9 +36,9 @@ A lo largo de la historia de la informática, el tratamiento de la información 
 Los ficheros son estructuras de información que permiten almacenar datos en dispositivos físicos como discos duros, memorias USB, SSD, etc. Son gestionados por el sistema operativo y constituyen la forma más básica de almacenamiento digital. Cada fichero tiene un nombre y una extensión que indica el tipo de contenido que almacena (por ejemplo, .txt, .jpg, .mp3).
 
 ### 1.1 Tipos de ficheros y formatos
-Los ficheros pueden clasificarse según:
+Los ficheros pueden clasificarse según su contenido interno o según su organización o forma de acceso. A continuación se detalla esta clasificación.
 
-a) Su contenido interno
+a) Tipos de ficheros según su contenido interno
 
 - **Ficheros de texto**: contienen caracteres codificados en sistemas como ASCII o Unicode. Son legibles por humanos y por editores de texto. Ejemplos:
   - .txt: texto plano.
@@ -54,7 +54,19 @@ a) Su contenido interno
 
 > **Ejemplo práctico**: si abrimos un fichero .docx con el bloc de notas, veremos una secuencia de caracteres sin sentido, ya que el editor no interpreta el formato binario. En cambio, un .txt mostrará el contenido directamente.
 
-b) Su organización o forma de acceso
+> **Explorando la tabla ASCII**
+>
+>La codificación ASCII (American Standard Code for Information Interchange) es una de las más utilizadas para representar caracteres en sistemas informáticos. Utiliza **1 byte (8 bits)** por carácter, lo que permite representar **256 combinaciones posibles**, numeradas del **0 al 255**.
+>
+> Busca en internet una tabla ASCII de 8 bits. Observa y analiza las siguientes características:
+> - Los **32 primeros códigos (0–31)** corresponden a **caracteres no imprimibles**, usados históricamente para controlar transmisiones (como salto de línea, tabulador, etc.).
+> - La **diferencia entre letras mayúsculas y minúsculas** es de exactamente **32 posiciones**. Por ejemplo, el código ASCII de 'A' es 65 y el de 'a' es 97.
+> - Los **dígitos numéricos** ('0' a '9') tienen códigos ASCII que se obtienen **sumando 48** al valor numérico. Por ejemplo, el carácter '6' tiene el código 54, porque 6 + 48 = 54.
+> 
+> 💡 Puedes usar editores de texto o herramientas online para comprobar el código ASCII de distintos caracteres.
+
+
+b) Tipos de ficheros según su organización o forma de acceso
 - **Ficheros secuenciales**: los datos se almacenan uno tras otro. Para acceder a un dato específico, es necesario recorrer todos los anteriores. Son eficientes para escritura continua, pero lentos para búsquedas. 
 
   **Ejemplo**: una lista de clientes en un fichero .txt.
