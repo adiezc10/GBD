@@ -23,7 +23,6 @@ Esta unidad tiene como objetivo introducir los conceptos básicos relacionados c
     - [5.1 Arquitectura ANSI-SPARC: los tres niveles](#51-arquitectura-ansi-sparc-los-tres-niveles)
     - [5.2 Modelo funcional de cinco capas](#52-modelo-funcional-de-cinco-capas)
   - [6. Lenguaje SQL](#6-lenguaje-sql)
-  - [7. Actividades de aprendizaje](#7-actividades-de-aprendizaje)
 
 ## 0. Introducción
 En el contexto de los sistemas informáticos, el almacenamiento de la información es un aspecto fundamental que ha evolucionado desde simples estructuras de ficheros hasta complejos sistemas de bases de datos. 
@@ -461,8 +460,3 @@ SQL está estandarizado por la ISO y se divide en varios sublenguajes, cada uno 
   - ROLLBACK: Deshacer cambios.
 
 Como referencias para aprender SQL nos basaremos en la guía de [w3schools.com](https://www.w3schools.com/sql/)
-
-## 7. Actividades de aprendizaje
-Se recomienda realizar prácticas con Access o LibreOffice Base: crear tablas, establecer relaciones, diseñar formularios, generar informes, ejecutar consultas.
-
-**Actividad:** Realiza una práctica guiada con Access que incluya creación de tablas, relaciones y consultas.
