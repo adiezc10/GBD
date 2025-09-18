@@ -5,6 +5,8 @@ Esta unidad tiene como objetivo introducir los conceptos básicos relacionados c
   - [0. Introducción](#0-introducción)
   - [1. Ficheros](#1-ficheros)
     - [1.1 Tipos de ficheros y formatos](#11-tipos-de-ficheros-y-formatos)
+      - [Tipos de ficheros según su contenido interno](#tipos-de-ficheros-según-su-contenido-interno)
+      - [Tipos de ficheros según su organización o forma de acceso](#tipos-de-ficheros-según-su-organización-o-forma-de-acceso)
     - [1.2 Problemas de los sistemas basados en ficheros](#12-problemas-de-los-sistemas-basados-en-ficheros)
   - [2. Bases de Datos](#2-bases-de-datos)
     - [2.1 Conceptos](#21-conceptos)
@@ -37,7 +39,7 @@ Los ficheros son estructuras de información que permiten almacenar datos en dis
 ### 1.1 Tipos de ficheros y formatos
 Los ficheros pueden clasificarse según su contenido interno o según su organización o forma de acceso. A continuación se detalla esta clasificación.
 
-a) Tipos de ficheros según su contenido interno
+#### Tipos de ficheros según su contenido interno
 
 - **Ficheros de texto**: contienen caracteres codificados en sistemas como ASCII o Unicode. Son legibles por humanos y por editores de texto. Ejemplos:
   - .txt: texto plano.
@@ -64,8 +66,7 @@ a) Tipos de ficheros según su contenido interno
 > 
 > 💡 Puedes usar editores de texto o herramientas online para comprobar el código ASCII de distintos caracteres.
 
-
-b) Tipos de ficheros según su organización o forma de acceso
+#### Tipos de ficheros según su organización o forma de acceso
 - **Ficheros secuenciales**: los datos se almacenan uno tras otro. Para acceder a un dato específico, es necesario recorrer todos los anteriores. Son eficientes para escritura continua, pero lentos para búsquedas. 
 
   **Ejemplo**: una lista de clientes en un fichero .txt.
@@ -163,7 +164,7 @@ Aunque los ficheros son útiles para almacenar información, presentan varias li
 
 Este ejemplo muestra cómo el uso de ficheros como sistema de almacenamiento puede generar errores, duplicidades y dificultades de gestión. Las bases de datos permiten evitar estos problemas.
 
-> Actividad 1: trabajando con ficheros
+> Actividad 1.1: trabajando con ficheros
 
 ## 2. Bases de Datos
 Las bases de datos son una evolución natural de los sistemas de almacenamiento de información. Frente a las limitaciones de los ficheros tradicionales, las bases de datos permiten organizar, acceder y gestionar grandes volúmenes de información de forma eficiente, segura y estructurada.
@@ -210,7 +211,7 @@ Otros conceptos que urilizaremos en futuras unidades:
 - **Scripts o guiones**: conjunto de instrucciones que automatizan tareas sobre la base de datos.
 - **Procedimientos**: son un tipo especial de script que se encuentra almacenado en la base de datos.
 
-> Actividad 2: Conceptos de bases de datos
+> Actividad 1.2: Conceptos de bases de datos
 
 ### 2.2 ACID
 En el contexto de las bases de datos, ACID es un acrónimo que representa cuatro propiedades (Atomicidad, Consistencia, Aislamiento y Durabilidad) que aseguran la fiabilidad e integridad de las transacciones de la base de datos. Estas propiedades garantizan que un conjunto de operaciones se ejecute de manera segura y que los datos se mantengan en un estado válido, incluso frente a errores o fallas del sistema. 
