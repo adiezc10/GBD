@@ -2,44 +2,44 @@
 Esta unidad tiene como objetivo introducir los conceptos básicos relacionados con los mecanismos de almacenamiento, su clasificación, ventajas e inconvenientes, y sentar las bases para comprender el funcionamiento de los sistemas gestores de bases de datos (SGBD).
 
 - [Unidad 1: Sistemas de Almacenamiento de la Información](#unidad-1-sistemas-de-almacenamiento-de-la-información)
-  - [0. Introducción](#0-introducción)
-  - [1. Ficheros](#1-ficheros)
-    - [1.1 Tipos de ficheros y formatos](#11-tipos-de-ficheros-y-formatos)
-      - [Tipos de ficheros según su contenido interno](#tipos-de-ficheros-según-su-contenido-interno)
-      - [Tipos de ficheros según su organización o forma de acceso](#tipos-de-ficheros-según-su-organización-o-forma-de-acceso)
-    - [1.2 Problemas de los sistemas basados en ficheros](#12-problemas-de-los-sistemas-basados-en-ficheros)
-  - [2. Bases de Datos](#2-bases-de-datos)
-    - [2.1 Conceptos](#21-conceptos)
-    - [2.2 ACID](#22-acid)
-    - [2.3 Usos y tipos según el modelo de datos](#23-usos-y-tipos-según-el-modelo-de-datos)
-    - [2.4 Ubicación de la información](#24-ubicación-de-la-información)
-  - [3. Sistemas Gestores de Bases de Datos (SGBD)](#3-sistemas-gestores-de-bases-de-datos-sgbd)
-    - [3.1 Funciones de un SGBD](#31-funciones-de-un-sgbd)
-    - [3.2 Componentes de un SGBD](#32-componentes-de-un-sgbd)
-    - [3.3 Tipos de SGBD](#33-tipos-de-sgbd)
-  - [4. Bases de Datos Centralizadas y Distribuidas](#4-bases-de-datos-centralizadas-y-distribuidas)
-    - [4.1 Bases de datos centralizadas](#41-bases-de-datos-centralizadas)
-    - [4.2 Bases de datos distribuidas](#42-bases-de-datos-distribuidas)
-    - [4.3 Otros modelos de basess de datos](#43-otros-modelos-de-basess-de-datos)
-  - [5. Modelo de Capas](#5-modelo-de-capas)
-    - [5.1 Arquitectura ANSI-SPARC: los tres niveles](#51-arquitectura-ansi-sparc-los-tres-niveles)
-    - [5.2 Modelo funcional de cinco capas](#52-modelo-funcional-de-cinco-capas)
-  - [6. Lenguaje SQL](#6-lenguaje-sql)
+- [0. Introducción](#0-introducción)
+- [1. Ficheros](#1-ficheros)
+  - [1.1 Tipos de ficheros y formatos](#11-tipos-de-ficheros-y-formatos)
+    - [Tipos de ficheros según su contenido interno](#tipos-de-ficheros-según-su-contenido-interno)
+    - [Tipos de ficheros según su organización o forma de acceso](#tipos-de-ficheros-según-su-organización-o-forma-de-acceso)
+  - [1.2 Problemas de los sistemas basados en ficheros](#12-problemas-de-los-sistemas-basados-en-ficheros)
+- [2. Bases de Datos](#2-bases-de-datos)
+  - [2.1 Conceptos](#21-conceptos)
+  - [2.2 ACID](#22-acid)
+  - [2.3 Usos y tipos según el modelo de datos](#23-usos-y-tipos-según-el-modelo-de-datos)
+  - [2.4 Ubicación de la información](#24-ubicación-de-la-información)
+- [3. Sistemas Gestores de Bases de Datos (SGBD)](#3-sistemas-gestores-de-bases-de-datos-sgbd)
+  - [3.1 Funciones de un SGBD](#31-funciones-de-un-sgbd)
+  - [3.2 Componentes de un SGBD](#32-componentes-de-un-sgbd)
+  - [3.3 Tipos de SGBD](#33-tipos-de-sgbd)
+- [4. Bases de Datos Centralizadas y Distribuidas](#4-bases-de-datos-centralizadas-y-distribuidas)
+  - [4.1 Bases de datos centralizadas](#41-bases-de-datos-centralizadas)
+  - [4.2 Bases de datos distribuidas](#42-bases-de-datos-distribuidas)
+  - [4.3 Otros modelos de basess de datos](#43-otros-modelos-de-basess-de-datos)
+- [5. Modelo de Capas](#5-modelo-de-capas)
+  - [5.1 Arquitectura ANSI-SPARC: los tres niveles](#51-arquitectura-ansi-sparc-los-tres-niveles)
+  - [5.2 Modelo funcional de cinco capas](#52-modelo-funcional-de-cinco-capas)
+- [6. Lenguaje SQL](#6-lenguaje-sql)
 
-## 0. Introducción
+# 0. Introducción
 En el contexto de los sistemas informáticos, el almacenamiento de la información es un aspecto fundamental que ha evolucionado desde simples estructuras de ficheros hasta complejos sistemas de bases de datos. 
 
 A lo largo de la historia de la informática, el tratamiento de la información ha pasado de ser un proceso centrado en los programas (orientado al proceso) a estar centrado en los datos (orientado a la información). Esta evolución ha permitido mejorar la eficiencia, la seguridad, la integridad y la accesibilidad de los datos, especialmente en entornos multiusuario y distribuidos.
 
 ![Sistema distribuído](./img/sistemasdistribuidos.png)
 
-## 1. Ficheros
+# 1. Ficheros
 Los ficheros son estructuras de información que permiten almacenar datos en dispositivos físicos como discos duros, memorias USB, SSD, etc. Son gestionados por el sistema operativo y constituyen la forma más básica de almacenamiento digital. Cada fichero tiene un nombre y una extensión que indica el tipo de contenido que almacena (por ejemplo, .txt, .jpg, .mp3).
 
-### 1.1 Tipos de ficheros y formatos
+## 1.1 Tipos de ficheros y formatos
 Los ficheros pueden clasificarse según su contenido interno o según su organización o forma de acceso. A continuación se detalla esta clasificación.
 
-#### Tipos de ficheros según su contenido interno
+### Tipos de ficheros según su contenido interno
 
 - **Ficheros de texto**: contienen caracteres codificados en sistemas como ASCII o Unicode. Son legibles por humanos y por editores de texto. Ejemplos:
   - .txt: texto plano.
@@ -66,7 +66,7 @@ Los ficheros pueden clasificarse según su contenido interno o según su organiz
 > 
 > 💡 Puedes usar editores de texto o herramientas online para comprobar el código ASCII de distintos caracteres.
 
-#### Tipos de ficheros según su organización o forma de acceso
+### Tipos de ficheros según su organización o forma de acceso
 - **Ficheros secuenciales**: los datos se almacenan uno tras otro. Para acceder a un dato específico, es necesario recorrer todos los anteriores. Son eficientes para escritura continua, pero lentos para búsquedas. 
 
   **Ejemplo**: una lista de clientes en un fichero .txt.
@@ -128,7 +128,7 @@ Para acceder al libro con ISBN `978-84-67890`, el sistema consulta el índice y 
 - Requiere mantener y actualizar los índices.
 - Mayor complejidad al introducir datos y borrarlos.
 
-### 1.2 Problemas de los sistemas basados en ficheros
+## 1.2 Problemas de los sistemas basados en ficheros
 Aunque los ficheros son útiles para almacenar información, presentan varias limitaciones cuando se utilizan como base para sistemas de gestión:
 - **Redundancia**: la misma información puede estar duplicada en varios ficheros.
 - **Inconsistencia**: si se actualiza un dato en un fichero pero no en otro, se genera incoherencia.
@@ -166,14 +166,14 @@ Este ejemplo muestra cómo el uso de ficheros como sistema de almacenamiento pue
 
 > Actividad 1.1: trabajando con ficheros
 
-## 2. Bases de Datos
+# 2. Bases de Datos
 Las bases de datos son una evolución natural de los sistemas de almacenamiento de información. Frente a las limitaciones de los ficheros tradicionales, las bases de datos permiten organizar, acceder y gestionar grandes volúmenes de información de forma eficiente, segura y estructurada.
 
 Una base de datos no es solo un conjunto de datos, sino una **estructura** diseñada para facilitar su uso por múltiples usuarios y aplicaciones, manteniendo la integridad, la coherencia y la disponibilidad de la información.
 
 ![](./img/esquemaDB.png)
 
-### 2.1 Conceptos
+## 2.1 Conceptos
 A continuación se definen los principales elementos que componen una base de datos:
 - **Dato**: unidad mínima de información. Es un hecho conocido que puede registrarse y tiene un significado implícito Ejemplo: 2025, Madrid, Juan.
 - **Campo**: conjunto de datos del mismo tipo que representan una característica. Ejemplo: Nombre, Fecha de nacimiento.
@@ -213,7 +213,7 @@ Otros conceptos que urilizaremos en futuras unidades:
 
 > Actividad 1.2: Conceptos de bases de datos
 
-### 2.2 ACID
+## 2.2 ACID
 En el contexto de las bases de datos, ACID es un acrónimo que representa cuatro propiedades (Atomicidad, Consistencia, Aislamiento y Durabilidad) que aseguran la fiabilidad e integridad de las transacciones de la base de datos. Estas propiedades garantizan que un conjunto de operaciones se ejecute de manera segura y que los datos se mantengan en un estado válido, incluso frente a errores o fallas del sistema. 
 
 Las cuatro propiedades ACID:
@@ -235,7 +235,7 @@ Ejemplos de su aplicación:
 - Sistemas bancarios: Aseguran que las transferencias de dinero sean completas, correctas y permanentes. 
 - Sistemas de reservas: Garantizan que un asiento reservado no pueda ser reservado por dos usuarios simultáneamente. 
 
-### 2.3 Usos y tipos según el modelo de datos
+## 2.3 Usos y tipos según el modelo de datos
 
 Las bases de datos se utilizan en prácticamente todos los ámbitos de la sociedad:
 - **Administración**: gestión de clientes, facturas, productos, empleados.
@@ -273,7 +273,7 @@ Tipos de bases de datos según el modelo de datos:
 
 ![Ejemplo de base de datos multidimensional](./img/bd_multidimensional.png)
 
-### 2.4 Ubicación de la información
+## 2.4 Ubicación de la información
 La ubicación física de una base de datos influye en su accesibilidad, rendimiento y seguridad. Existen varios modelos:
 - **Local**: la base de datos se encuentra en el mismo equipo que la aplicación. Ejemplo: una base de datos en Access.
 - **En servidor**: la base de datos reside en un servidor y se accede desde otros equipos a través de una red local o Internet.
@@ -283,10 +283,10 @@ La ubicación física de una base de datos influye en su accesibilidad, rendimie
 > Ejemplo práctico: una empresa con oficinas en Madrid, Barcelona y Valencia puede tener una base de datos distribuida, donde cada sede gestiona sus propios datos, pero todos están sincronizados.
 
 
-## 3. Sistemas Gestores de Bases de Datos (SGBD)
+# 3. Sistemas Gestores de Bases de Datos (SGBD)
 Un **Sistema Gestor de Bases de Datos (SGBD)** es un conjunto de programas que permite crear, administrar y utilizar bases de datos de forma eficiente. Su aparición supuso una mejora significativa respecto al uso de ficheros, al ofrecer mecanismos para garantizar la integridad, seguridad y accesibilidad de los datos, incluso en entornos multiusuario y distribuidos.
 
-### 3.1 Funciones de un SGBD
+## 3.1 Funciones de un SGBD
 Las funciones de un SGBD pueden variar según el tipo y el fabricante, pero en general incluyen:
 
 - **Almacenamiento, acceso y actualización de datos**: permite a los usuarios realizar operaciones como insertar, modificar, eliminar y consultar datos.
@@ -301,7 +301,7 @@ Las funciones de un SGBD pueden variar según el tipo y el fabricante, pero en g
 
 > **Ejemplo**: en una base de datos de una tienda online, el SGBD garantiza que dos usuarios no puedan comprar el mismo producto si solo queda una unidad disponible, gracias a la gestión de concurrencia y transacciones (vemos el concepto a continuación).
 
-### 3.2 Componentes de un SGBD
+## 3.2 Componentes de un SGBD
 Un SGBD está formado por varios componentes que trabajan conjuntamente:
 - **Procesador de consultas**: interpreta las instrucciones SQL y genera un plan de ejecución.
 - **Motor de ejecución**: realiza las operaciones solicitadas sobre los datos.
@@ -315,7 +315,7 @@ Un SGBD está formado por varios componentes que trabajan conjuntamente:
 
 > **Ejemplo**: el _procesador de consultas_ traduce una instrucción SELECT en una serie de pasos que el _motor_ ejecuta, accediendo a los datos a través del _gestor de almacenamiento_ y utilizando el _buffer_ para acelerar el proceso. Conoceremos en detalle la función SELECT en próximas unidades.
 
-### 3.3 Tipos de SGBD
+## 3.3 Tipos de SGBD
 Los SGBD se pueden clasificar según distintos criterios:
 
 a) Por modelo de datos
@@ -337,10 +337,10 @@ c) Por arquitectura
 
 > Actividad 3: Instalación y uso de un SGBD
 
-## 4. Bases de Datos Centralizadas y Distribuidas
+# 4. Bases de Datos Centralizadas y Distribuidas
 La forma en que se almacena y se accede a la información en una base de datos puede variar según la arquitectura del sistema. Esta arquitectura influye directamente en aspectos como el rendimiento, la escalabilidad, la seguridad y la disponibilidad de los datos.
 
-### 4.1 Bases de datos centralizadas
+## 4.1 Bases de datos centralizadas
 Una base de datos centralizada es aquella en la que toda la información se almacena en un único servidor. Este servidor actúa como punto de acceso para todos los usuarios y aplicaciones que necesitan consultar o modificar los datos.
 
 ✅ Ventajas:
@@ -355,7 +355,7 @@ Una base de datos centralizada es aquella en la que toda la información se alma
 
 > **Ejemplo**: la base de datos de una biblioteca escolar que se gestiona desde un único ordenador en la sala de profesores.
 
-### 4.2 Bases de datos distribuidas
+## 4.2 Bases de datos distribuidas
 Una base de datos distribuida es aquella en la que los datos se almacenan en **varios servidores conectados entre sí** mediante una red. Cada servidor puede contener una parte de la base de datos o una copia completa, dependiendo del modelo de distribución.
 
 ✅ Ventajas:
@@ -370,17 +370,17 @@ Una base de datos distribuida es aquella en la que los datos se almacenan en **v
 
 > **Ejemplo**: una empresa con sedes en distintas ciudades que almacena los datos de cada oficina en servidores locales, pero sincronizados entre sí para mantener una visión global.
 
-### 4.3 Otros modelos de basess de datos
+## 4.3 Otros modelos de basess de datos
 Además de las bases de datos centralizadas y distribuidas, existen otros modelos que complementan esta clasificación:
 - **Bases de datos reflejadas**: se mantiene una copia exacta de la base de datos en varios servidores, lo que mejora la disponibilidad y la seguridad ante fallos.
 - **Bases de datos locales**: el acceso se realiza desde el mismo equipo que almacena la base de datos, sin necesidad de red.
 
 > Razona si una base de datos reflejada y una local son bases de datos centralizadas o distribuídas.
 
-## 5. Modelo de Capas
+# 5. Modelo de Capas
 El modelo de capas en los sistemas gestores de bases de datos (SGBD) describe cómo se organiza y accede a la información desde distintos niveles de abstracción. Este modelo permite separar la forma en que los datos se almacenan físicamente de cómo se ven y utilizan por parte de los usuarios y aplicaciones.
 
-### 5.1 Arquitectura ANSI-SPARC: los tres niveles
+## 5.1 Arquitectura ANSI-SPARC: los tres niveles
 La [arquitectura propuesta por ANSI-SPARC](https://es.wikipedia.org/wiki/Arquitectura_ANSI-SPARC) en 1975 define tres niveles de visión de una base de datos:
 
 ![Arquitectura ANSI-SPARC](./img/modeloCapas.jpg)
@@ -408,7 +408,7 @@ Gracias a esta arquitectura, se consigue la **independencia de los datos**, lo q
 “La independencia de los datos es la inmunidad de las aplicaciones ante cambios en la estructura del almacenamiento y en los métodos de acceso.”
                           Definición de C.J. Date (1981)
 ```
-### 5.2 Modelo funcional de cinco capas
+## 5.2 Modelo funcional de cinco capas
 Además de los tres niveles de abstracción, los SGBD modernos operan siguiendo un modelo funcional de cinco capas que describe el flujo de una consulta desde el usuario hasta el sistema operativo. Este modelo tiene las siguientes caracterísitcas:
 - Facilidades para el usuario: interfaces gráficas, formularios, asistentes, etc.
 - Capa de acceso a datos: traduce las peticiones del usuario a instrucciones comprensibles por el sistema.
@@ -424,7 +424,7 @@ según el modelo de capas es el siguiente:
 
 ![Esquema del proceso de peticiones de un SGBD](./img/procesoPeticionSGBD.jpg)
 
-## 6. Lenguaje SQL
+# 6. Lenguaje SQL
 El lenguaje [SQL](https://es.wikipedia.org/wiki/SQL) (Structured Query Language traducido como lenguaje de consulta estructurada) es el estándar para interactuar con bases de datos relacionales. Es uno de los lenguajes más usados en el entorno profesional y de los más estudiados (consultar [survey.stackoverflow.co](https://survey.stackoverflow.co/2024/technology#most-popular-technologies-language-prof)). Es importante saber que no se trata de un lenguaje de programación sinó de programación sinó de un **lenguaje de consulta**. 
 
 ![Tecnologías más utilizadas en 2024 según survey.stackoverflow.co](./img/survey.stackoverflow.jpg)
