@@ -5,9 +5,30 @@
   - [1.1. ¿Qué es el diseño lógico?](#11-qué-es-el-diseño-lógico)
   - [1.2. Fases del diseño de bases de datos](#12-fases-del-diseño-de-bases-de-datos)
   - [1.3. Modelos de datos: conceptual, lógico y físico](#13-modelos-de-datos-conceptual-lógico-y-físico)
-- [2. Representación del problema: el modelo entidad/relación (E/R)](#2-representación-del-problema-el-modelo-entidadrelación-er)
-- [3. El modelo E/R ampliado](#3-el-modelo-er-ampliado)
-- [4. Construcción de diagramas E/R](#4-construcción-de-diagramas-er)
+- [2. Modelización conceptual del software](#2-modelización-conceptual-del-software)
+  - [2.1. Modelización de datos](#21-modelización-de-datos)
+  - [2.2. Diccionario de datos](#22-diccionario-de-datos)
+  - [2.3. Modelo Conceptual de Datos (MCD)](#23-modelo-conceptual-de-datos-mcd)
+- [3. Diagrama Entidad/Relación (DER)](#3-diagrama-entidadrelación-der)
+  - [3.1. Entidad](#31-entidad)
+  - [3.4. Atributos](#34-atributos)
+  - [3.2. Relación](#32-relación)
+  - [3.3. Cardinalidad y modalidad](#33-cardinalidad-y-modalidad)
+  - [3.5. Clave primaria y claves candidatas](#35-clave-primaria-y-claves-candidatas)
+  - [3.7 Construir un diagrama E/R](#37-construir-un-diagrama-er)
+  - [3.8 Ejemplo completo de E/R](#38-ejemplo-completo-de-er)
+- [4. Diagrama Entidad/Relación Extendido (DER-E)](#4-diagrama-entidadrelación-extendido-der-e)
+  - [4.1. Atributos compuestos, multivaluados y derivados](#41-atributos-compuestos-multivaluados-y-derivados)
+  - [4.2. Generalización/especialización](#42-generalizaciónespecialización)
+  - [4.3. Agregación](#43-agregación)
+- [5. Reglas de integridad](#5-reglas-de-integridad)
+  - [5.1. Integridad de entidad](#51-integridad-de-entidad)
+  - [5.2. Integridad referencial](#52-integridad-referencial)
+  - [5.3. Integridad de dominio](#53-integridad-de-dominio)
+- [6. Normalización](#6-normalización)
+  - [6.1. Concepto y objetivos](#61-concepto-y-objetivos)
+  - [6.2. Primera Forma Normal (1FN)](#62-primera-forma-normal-1fn)
+- [7. Restricciones no representables en el modelo lógico](#7-restricciones-no-representables-en-el-modelo-lógico)
 
 
 # 1. Introducción al diseño lógico
@@ -34,6 +55,8 @@ El proceso completo de diseño de una base de datos se divide en tres fases:
   - Implementa el modelo lógico en un SGBD concreto.
   - Incluye aspectos como tipos de datos, índices, rendimiento, almacenamiento.
 
+![](./img/disenoBD.jpg)
+
 Saltarse el diseño conceptual puede ahorrar tiempo en problemas simples, pero en sistemas complejos puede generar incoherencias y pérdida de calidad.
 
 ## 1.3. Modelos de datos: conceptual, lógico y físico
@@ -49,23 +72,206 @@ Saltarse el diseño conceptual puede ahorrar tiempo en problemas simples, pero e
 >  - Lógico: Tablas Empleados, Departamentos, con claves primarias y foráneas.
 >  - Físico: Script SQL que crea las tablas en MySQL.
 
-# 2. Representación del problema: el modelo entidad/relación (E/R)
+# 2. Modelización conceptual del software
 
-2.1. Entidades y ocurrencias
-2.2. Atributos: tipos, dominios y notaciones
-2.3. Relaciones: participación, cardinalidad y modalidad
-2.4. Relaciones reflexivas y no binarias
-2.5. Entidades débiles
-2.6. Ejemplo completo de diagrama E/R
+## 2.1. Modelización de datos
 
-# 3. El modelo E/R ampliado
+La modelización de datos es el proceso mediante el cual se representa la información relevante de un sistema mediante estructuras que permiten su análisis, diseño y posterior implementación en una base de datos.
 
-3.1. Generalización y especialización
-3.2. Jerarquías y herencia
+> Ejemplo: En una clínica veterinaria, el diseño conceptual incluiría entidades como Mascota, Dueño, Tratamiento. El diseño lógico definiría tablas con claves primarias y foráneas. El diseño físico implementaría esas tablas en MySQL con tipos de datos concretos.
 
-# 4. Construcción de diagramas E/R
+Interacción entre modelos:
+- El modelo conceptual se negocia con el usuario.
+- l modelo lógico se adapta al SGBD.
+- El modelo físico se implementa en SQL.
+## 2.2. Diccionario de datos
+El diccionario de datos (o metabase) es una herramienta que almacena metadatos, es decir, datos sobre los datos. Incluye:
+- Nombre de las tablas
+- Campos (atributos)
+- Tipos de datos
+- Claves primarias y foráneas
+- Restricciones (NOT NULL, UNIQUE, CHECK)
+- Índices
 
-4.1. Herramientas gráficas para modelado
-4.2. Buenas prácticas en la representación
-4.3. Documentación de restricciones no representables
+> Ejemplo:
+> - Tabla: TPaciente
+> - Campos: dni, nombre, fecha_nacimiento, telefono
+> - Clave primaria: dni
+> - Clave ajena: dni → TConsulta.dni_paciente
+> - Índices: iPaciente_nombre (nombre ASC)
+
+Este diccionario permite a los desarrolladores consultar la estructura lógica de la base de datos y facilita su mantenimiento.
+
+## 2.3. Modelo Conceptual de Datos (MCD)
+El MCD representa la visión estática del dominio del problema. Permite identificar:
+- Entidades
+- Atributos
+- Relaciones
+- Cardinalidades
+- Modalidades
+
+Características del MCD:
+- Representa el universo del discurso (todo lo que debe manejar el sistema).
+- Refleja el estado final de los datos.
+- Debe actualizarse si cambian los requisitos del sistema.
+
+Herramienta principal: **Diagrama Entidad/Relación (DER)**
+Propuesto por Peter Chen (1976), es una técnica estandarizada para representar datos de forma gráfica e independiente del SGBD.
+
+> Ejemplo:
+> En una tienda de bicicletas:
+> - Entidades: Bicicleta, Cliente, Venta
+> - Atributos: marca, modelo, precio, fecha_venta
+> - Relaciones: compra (entre Cliente y Bicicleta)
+> - Cardinalidad: Un cliente puede comprar varias bicicletas, pero cada bicicleta solo puede ser comprada por un cliente → 1:N
+
+# 3. Diagrama Entidad/Relación (DER)
+
+A lo largo de los años se han desarrollado varios modelos E/R y diagramas de representación para el modelo. En este curso vamos a usar el **modelo de Chen**. Este es un ejemplo de diagrama E/R que usa las normas de representación de Chen.
+
+![](./img/modeloChen.jpg)
+
+## 3.1. Entidad
+
+Una entidad es un objeto, sujeto o concepto sobre el que se recoge información básica en el sistema para poder realizar los procesos que se requieran.
+
+Ejemplos de entidades en un sistema de gestión de un centro de estudios:
+- ALUMNO
+- PROFESOR
+- ASIGNATURA
+- CURSO
+
+Las entidades se representan en los diagramas E/R mediante rectángulos.
+![](./img/entidad.jpg)
+
+## 3.4. Atributos
+Los atributos pueden pertenecer tanto a entidades como a relaciones. Se representan mediante círculos conectados a la entidad o relación correspondiente.
+
+Ejemplo de representación de los atributos de la entidad Alumno:
+![](./img/atributosAlumno.jpg)
+
+**Dominio de los atributos**: El dominio de un atributo es todo el conjunto de valores que se pueden asignar a ese atributo. Por ejemplo, el atributo DNI de la entidad Alumno tiene como dominio una *cadena de caracteres de longitud 9*.
+
+> Ejercicio1 : Indica cual sería el dominio de cada uno de los siguientes atributos de la entidad PERSONA:
+> - Fecha de nacimiento
+> - Localidad de nacimiento
+> - Edad
+> - EsMayorDeEdad
+> - DNI
+> - Teléfonos
+> - Nombre
+> - Apellidos
+
+**Tipos de atributos**:
+- Simples / Compuestos: Ej. FECHA puede dividirse en DÍA, MES, AÑO.
+![](./img/atributoSimpleCompuesto.jpg)
+- Monovaluados / Multivaluados: Ej. TELÉFONO puede tener varios valores.
+![](./img/atributo_multi_monoevaluado.jpg)
+- Obligatorios / Opcionales: Ej. AFICIONES puede ser opcional.
+![](./img/atributoOpcional.jpg)
+- Derivados / No derivados: Un atributo es derivado si se puede obtener a partir de los datos contenidos en otros atributos y es no derivado si su valor no depende de ningún otro atributo. **No es recomendable el uso de atributos derivados**. Ej. IMPORTE_VENTA derivado de UNIDADES y PRECIO.
+
+**Represenración de los atributos**:
+
+![](./img/representacionAtributos.jpg)
+
+> Ejercicio 2: Justifica si los siguientes atributos serían obligatorio-opcional, compuesto-simple, derivado-no derivado, monovaluado-multivaluado.
+> - Fecha de nacimiento
+>- Localidad de nacimiento
+> - Edad
+> - EsMayorDeEdad
+> - DNI
+> - Teléfonos
+> - Nombre
+> - Apellidos
+
+
+## 3.2. Relación
+Una relación es una asociación entre varias entidades a través de una acción realizable entre ellas.
+
+Ejemplos:
+- COMPRAR (entre CLIENTE y PRODUCTO)
+- CURSAR (entre ALUMNO y MÓDULO)
+- SER_HIJO (entre ALUMNO y PADRE)
+- SER_JEFE (entre elementos de la entidad EMPLEADO)
+
+Tipos de relaciones:
+- Binaria (grado 2): entre dos entidades.
+![](./img/relalcionBinaria.jpg)
+- Unaria o reflexiva (grado 1): entre elementos de la misma entidad.
+![](./img/relacionUnaria.jpg)
+- Ternaria (grado 3): entre tres entidades.
+![](./img/relacionTernaria.jpg)
+
+Las relaciones también pueden tener atributos (se explican más adelante).
+
+## 3.3. Cardinalidad y modalidad
+La cardinalidad indica el número mínimo y máximo de ocurrencias de una entidad que pueden estar relacionadas con una ocurrencia de otra entidad.
+
+![](./img/cardinalidad.jpg)
+
+Se representa como un par de números entre paréntesis:
+- (0,1) → mínimo cero, máximo uno
+- (1,1) → mínimo uno, máximo uno
+- (0,N) → mínimo cero, máximo muchos
+- (1,N) → mínimo uno, máximo muchos
+
+Tipos de correspondencia:
+- 1:1 (uno a uno): Ej. CASADO entre PERSONA y PERSONA
+- 1:N (uno a muchos): Ej. PERTENECE entre MUNICIPIO y PROVINCIA
+- N:M (muchos a muchos): Ej. COMPRA entre PRODUCTO y CLIENTE
+
+![](./img/ejemploCardinalidad.jpg)
+
+> ejercicio diapositivas
+
+## 3.5. Clave primaria y claves candidatas
+Una clave identifica de forma única a cada elemento de una entidad.
+- Clave primaria o principal: la más adecuada según criterios de simplicidad, longitud, representatividad y estabilidad.
+- Claves secundarias o alternativas: Puede haber varias en una entidad pero no se debe abusar de estas claves. Serán todas aquellas que decidamos, aparte de la primaria.
+
+## 3.7 Construir un diagrama E/R
+Para construir un diagrama E/R completo se recomienda seguir estos pasos metodológicos:
+- Leer y comprender el problema.
+- Identificar entidades, relaciones y atributos.
+- Proponer claves primarias y establecer tipos de atributos y dominios.
+- Identificar generalizaciones/especializaciones y relaciones de debilidad.
+- Determinar cardinalidades y tipos de correspondencia.
+- Representar gráficamente el esquema.
+- Revisar y refinar el diagrama.
+
+## 3.8 Ejemplo completo de E/R
+
+![](./img/modeloChen.jpg)
+
+> Actividad 2.1
+
+# 4. Diagrama Entidad/Relación Extendido (DER-E)
+
+## 4.1. Atributos compuestos, multivaluados y derivados
+## 4.2. Generalización/especialización
+## 4.3. Agregación
+
+
+# 5. Reglas de integridad
+
+## 5.1. Integridad de entidad
+## 5.2. Integridad referencial
+## 5.3. Integridad de dominio
+
+
+# 6. Normalización
+
+## 6.1. Concepto y objetivos
+## 6.2. Primera Forma Normal (1FN)
+6.3. Segunda Forma Normal (2FN)
+6.4. Tercera Forma Normal (3FN)
+6.5. Ejemplo completo de normalización
+
+
+# 7. Restricciones no representables en el modelo lógico
+
+7.1. Reglas de negocio complejas
+7.2. Validaciones condicionales
+7.3. Restricciones temporales o contextuales
 
