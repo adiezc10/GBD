@@ -11,11 +11,12 @@
   - [2.3. Modelo Conceptual de Datos (MCD)](#23-modelo-conceptual-de-datos-mcd)
 - [3. Diagrama Entidad/Relación (DER)](#3-diagrama-entidadrelación-der)
   - [3.1. Entidad](#31-entidad)
+  - [3.5. Clave primaria y claves candidatas](#35-clave-primaria-y-claves-candidatas)
   - [3.4. Atributos](#34-atributos)
   - [3.2. Relación](#32-relación)
   - [3.3. Cardinalidad y modalidad](#33-cardinalidad-y-modalidad)
-  - [3.5. Clave primaria y claves candidatas](#35-clave-primaria-y-claves-candidatas)
   - [3.7 Construir un diagrama E/R](#37-construir-un-diagrama-er)
+  - [Debilidad](#debilidad)
   - [3.8 Ejemplo completo de E/R](#38-ejemplo-completo-de-er)
 - [4. Diagrama Entidad/Relación Extendido (DER-E)](#4-diagrama-entidadrelación-extendido-der-e)
   - [4.1. Atributos compuestos, multivaluados y derivados](#41-atributos-compuestos-multivaluados-y-derivados)
@@ -144,6 +145,11 @@ Ejemplos de entidades en un sistema de gestión de un centro de estudios:
 Las entidades se representan en los diagramas E/R mediante rectángulos.
 ![](./img/entidad.jpg)
 
+## 3.5. Clave primaria y claves candidatas
+Una clave identifica de forma única a cada elemento de una entidad.
+- Clave primaria o principal: la más adecuada según criterios de simplicidad, longitud, representatividad y estabilidad.
+- Claves secundarias o alternativas: Puede haber varias en una entidad pero no se debe abusar de estas claves. Serán todas aquellas que decidamos, aparte de la primaria
+
 ## 3.4. Atributos
 Los atributos pueden pertenecer tanto a entidades como a relaciones. Se representan mediante círculos conectados a la entidad o relación correspondiente.
 
@@ -223,12 +229,8 @@ Tipos de correspondencia:
 
 ![](./img/ejemploCardinalidad.jpg)
 
-> ejercicio diapositivas
+> ejercicios diapositivas
 
-## 3.5. Clave primaria y claves candidatas
-Una clave identifica de forma única a cada elemento de una entidad.
-- Clave primaria o principal: la más adecuada según criterios de simplicidad, longitud, representatividad y estabilidad.
-- Claves secundarias o alternativas: Puede haber varias en una entidad pero no se debe abusar de estas claves. Serán todas aquellas que decidamos, aparte de la primaria.
 
 ## 3.7 Construir un diagrama E/R
 Para construir un diagrama E/R completo se recomienda seguir estos pasos metodológicos:
@@ -239,6 +241,15 @@ Para construir un diagrama E/R completo se recomienda seguir estos pasos metodol
 - Determinar cardinalidades y tipos de correspondencia.
 - Representar gráficamente el esquema.
 - Revisar y refinar el diagrama.
+
+## Debilidad
+Una entidad es débil frente a otra que es fuerte cuando para existir un elemento de la débil es necesario que exista un elemento de la fuerte.
+
+Por ejemplo, en la gestión de pedidos y ventas de un comercio, un pedido consta de varias líneas de pedido (una por cada producto). Si PEDIDO es una entidad y LINEA_PEDIDO es otra entidad, PEDIDO sería entidad fuerte y LINEA_PEDIDO una entidad débil respecto de la anterior.
+
+Las entidades débiles se representan en los diagramas E/R rodeadas por una
+línea doble:
+![](./img/debilidad.jpg)
 
 ## 3.8 Ejemplo completo de E/R
 
