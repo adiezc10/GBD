@@ -251,6 +251,13 @@ Las entidades débiles se representan en los diagramas E/R rodeadas por una
 línea doble:
 ![](./img/debilidad.jpg)
 
+- Dependencia en existencia: Las ocurrencias de una entidad débil no tienen ningún sentido en la base de datos sin una ocurrencia de la entidad fuerte con la que están relacionadas.
+![]()
+- Dependencia en identificación: Además de la dependencia en existencia, la entidad débil necesita a la fuerte para poder crear una clave a partir de la clave que tiene la entidad fuerte. Es decir, en el ejemplo, cada línea de pedido se identificaría con
+numPed y numLinea.
+![]()
+
+
 ## 3.8 Ejemplo completo de E/R
 
 ![](./img/modeloChen.jpg)
