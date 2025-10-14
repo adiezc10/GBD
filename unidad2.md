@@ -11,12 +11,12 @@
   - [2.3. Modelo Conceptual de Datos (MCD)](#23-modelo-conceptual-de-datos-mcd)
 - [3. Diagrama Entidad/Relación (DER)](#3-diagrama-entidadrelación-der)
   - [3.1. Entidad](#31-entidad)
-  - [3.5. Clave primaria y claves candidatas](#35-clave-primaria-y-claves-candidatas)
-  - [3.4. Atributos](#34-atributos)
-  - [3.2. Relación](#32-relación)
-  - [3.3. Cardinalidad y modalidad](#33-cardinalidad-y-modalidad)
-  - [3.7 Construir un diagrama E/R](#37-construir-un-diagrama-er)
-  - [Debilidad](#debilidad)
+  - [3.2. Clave primaria y claves candidatas](#32-clave-primaria-y-claves-candidatas)
+  - [3.3. Atributos](#33-atributos)
+  - [3.4. Relación](#34-relación)
+  - [3.5. Cardinalidad y modalidad](#35-cardinalidad-y-modalidad)
+  - [3.6 Construir un diagrama E/R](#36-construir-un-diagrama-er)
+  - [3.7 Debilidad](#37-debilidad)
   - [3.8 Ejemplo completo de E/R](#38-ejemplo-completo-de-er)
 - [4. Diagrama Entidad/Relación Extendido (DER-E)](#4-diagrama-entidadrelación-extendido-der-e)
   - [4.1. Atributos compuestos, multivaluados y derivados](#41-atributos-compuestos-multivaluados-y-derivados)
@@ -143,14 +143,15 @@ Ejemplos de entidades en un sistema de gestión de un centro de estudios:
 - CURSO
 
 Las entidades se representan en los diagramas E/R mediante rectángulos.
+
 ![](./img/entidad.jpg)
 
-## 3.5. Clave primaria y claves candidatas
+## 3.2. Clave primaria y claves candidatas
 Una clave identifica de forma única a cada elemento de una entidad.
 - Clave primaria o principal: la más adecuada según criterios de simplicidad, longitud, representatividad y estabilidad.
 - Claves secundarias o alternativas: Puede haber varias en una entidad pero no se debe abusar de estas claves. Serán todas aquellas que decidamos, aparte de la primaria
 
-## 3.4. Atributos
+## 3.3. Atributos
 Los atributos pueden pertenecer tanto a entidades como a relaciones. Se representan mediante círculos conectados a la entidad o relación correspondiente.
 
 Ejemplo de representación de los atributos de la entidad Alumno:
@@ -191,8 +192,7 @@ Ejemplo de representación de los atributos de la entidad Alumno:
 > - Nombre
 > - Apellidos
 
-
-## 3.2. Relación
+## 3.4. Relación
 Una relación es una asociación entre varias entidades a través de una acción realizable entre ellas.
 
 Ejemplos:
@@ -211,7 +211,7 @@ Tipos de relaciones:
 
 Las relaciones también pueden tener atributos (se explican más adelante).
 
-## 3.3. Cardinalidad y modalidad
+## 3.5. Cardinalidad y modalidad
 La cardinalidad indica el número mínimo y máximo de ocurrencias de una entidad que pueden estar relacionadas con una ocurrencia de otra entidad.
 
 ![](./img/cardinalidad.jpg)
@@ -232,7 +232,7 @@ Tipos de correspondencia:
 > ejercicios diapositivas
 
 
-## 3.7 Construir un diagrama E/R
+## 3.6 Construir un diagrama E/R
 Para construir un diagrama E/R completo se recomienda seguir estos pasos metodológicos:
 - Leer y comprender el problema.
 - Identificar entidades, relaciones y atributos.
@@ -242,7 +242,7 @@ Para construir un diagrama E/R completo se recomienda seguir estos pasos metodol
 - Representar gráficamente el esquema.
 - Revisar y refinar el diagrama.
 
-## Debilidad
+## 3.7 Debilidad
 Una entidad es débil frente a otra que es fuerte cuando para existir un elemento de la débil es necesario que exista un elemento de la fuerte.
 
 Por ejemplo, en la gestión de pedidos y ventas de un comercio, un pedido consta de varias líneas de pedido (una por cada producto). Si PEDIDO es una entidad y LINEA_PEDIDO es otra entidad, PEDIDO sería entidad fuerte y LINEA_PEDIDO una entidad débil respecto de la anterior.
@@ -252,11 +252,11 @@ línea doble:
 ![](./img/debilidad.jpg)
 
 - Dependencia en existencia: Las ocurrencias de una entidad débil no tienen ningún sentido en la base de datos sin una ocurrencia de la entidad fuerte con la que están relacionadas.
-![]()
+![](./img/debilidadExistencia.jpg)
+
 - Dependencia en identificación: Además de la dependencia en existencia, la entidad débil necesita a la fuerte para poder crear una clave a partir de la clave que tiene la entidad fuerte. Es decir, en el ejemplo, cada línea de pedido se identificaría con
 numPed y numLinea.
-![]()
-
+![](./img/debilidadIdentificacion.jpg)
 
 ## 3.8 Ejemplo completo de E/R
 
