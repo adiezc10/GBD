@@ -286,6 +286,8 @@ La ubicación física de una base de datos influye en su accesibilidad, rendimie
 # 3. Sistemas Gestores de Bases de Datos (SGBD)
 Un **Sistema Gestor de Bases de Datos (SGBD)** es un conjunto de programas que permite crear, administrar y utilizar bases de datos de forma eficiente. Su aparición supuso una mejora significativa respecto al uso de ficheros, al ofrecer mecanismos para garantizar la integridad, seguridad y accesibilidad de los datos, incluso en entornos multiusuario y distribuidos.
 
+![EjemploSGBD](./img/SGBD.png)
+
 ## 3.1 Funciones de un SGBD
 Las funciones de un SGBD pueden variar según el tipo y el fabricante, pero en general incluyen:
 
