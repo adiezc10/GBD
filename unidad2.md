@@ -249,7 +249,10 @@ Por ejemplo, en la gestión de pedidos y ventas de un comercio, un pedido consta
 
 Las entidades débiles se representan en los diagramas E/R rodeadas por una
 línea doble:
+
 ![](./img/debilidad.jpg)
+
+También podemos encontrar representada la relación entre una entidad fuerte y una débil con una **relación débil**. Esto se representa mediente un doble rombo. 
 
 - Dependencia en existencia: Las ocurrencias de una entidad débil no tienen ningún sentido en la base de datos sin una ocurrencia de la entidad fuerte con la que están relacionadas.
 ![](./img/debilidadExistencia.jpg)
