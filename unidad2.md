@@ -14,9 +14,9 @@
   - [3.2. Clave primaria y claves candidatas](#32-clave-primaria-y-claves-candidatas)
   - [3.3. Atributos](#33-atributos)
   - [3.4. Relación](#34-relación)
-  - [3.5. Cardinalidad y modalidad](#35-cardinalidad-y-modalidad)
+  - [3.5. Cardinalidad y correspondencia](#35-cardinalidad-y-correspondencia)
   - [3.6 Construir un diagrama E/R](#36-construir-un-diagrama-er)
-  - [3.7 Debilidad](#37-debilidad)
+  - [3.7 Debilidad y dependencia](#37-debilidad-y-dependencia)
   - [3.8 Ejemplo completo de E/R](#38-ejemplo-completo-de-er)
 - [4. Diagrama Entidad/Relación Extendido (DER-E)](#4-diagrama-entidadrelación-extendido-der-e)
   - [4.1. Atributos compuestos, multivaluados y derivados](#41-atributos-compuestos-multivaluados-y-derivados)
@@ -196,10 +196,10 @@ Ejemplo de representación de los atributos de la entidad Alumno:
 Una relación es una asociación entre varias entidades a través de una acción realizable entre ellas.
 
 Ejemplos:
-- COMPRAR (entre CLIENTE y PRODUCTO)
-- CURSAR (entre ALUMNO y MÓDULO)
-- SER_HIJO (entre ALUMNO y PADRE)
-- SER_JEFE (entre elementos de la entidad EMPLEADO)
+- COMPRAR entre CLIENTE y PRODUCTO
+- CURSAR entre ALUMNO y MÓDULO
+- SER_HIJO entre ALUMNO y PADRE
+- SER_JEFE entre elementos de la entidad EMPLEADO
 
 Tipos de relaciones:
 - Binaria (grado 2): entre dos entidades.
@@ -211,7 +211,7 @@ Tipos de relaciones:
 
 Las relaciones también pueden tener atributos (se explican más adelante).
 
-## 3.5. Cardinalidad y modalidad
+## 3.5. Cardinalidad y correspondencia
 La cardinalidad indica el número mínimo y máximo de ocurrencias de una entidad que pueden estar relacionadas con una ocurrencia de otra entidad.
 
 ![](./img/cardinalidad.jpg)
@@ -222,15 +222,21 @@ Se representa como un par de números entre paréntesis:
 - (0,N) → mínimo cero, máximo muchos
 - (1,N) → mínimo uno, máximo muchos
 
-Tipos de correspondencia:
+El **tipo de correspondencia** o relación de cardinalidad expresa el número máximo de elementos u ocurrencias que se pueden llegar a relacionar entre las entidades de una relación. Se obtiene de la cardinalidad de cada entidad que forma parte de una relación.
+
+Ejemplos de tipos de correspondencia:
 - 1:1 (uno a uno): Ej. CASADO entre PERSONA y PERSONA
 - 1:N (uno a muchos): Ej. PERTENECE entre MUNICIPIO y PROVINCIA
 - N:M (muchos a muchos): Ej. COMPRA entre PRODUCTO y CLIENTE
 
 ![](./img/ejemploCardinalidad.jpg)
 
-> ejercicios diapositivas
-
+> Ejemplo: En un supermercado hay productos organizados en categorías.
+Cada producto pertenece a una única categoría. Están previstas categorías que aún pueden no tener productos. Calcula las cardinalidades de cada entidad y el tipo de correspondencia y represéntalos en el esquema E/R.
+>
+> La relación de las entidades de este diagrama es ORGANIZA entre CATEGORÍA y PRODUCTO
+>
+> ![](./img/ejemploCardinalidad2.jpg)
 
 ## 3.6 Construir un diagrama E/R
 Para construir un diagrama E/R completo se recomienda seguir estos pasos metodológicos:
@@ -242,20 +248,22 @@ Para construir un diagrama E/R completo se recomienda seguir estos pasos metodol
 - Representar gráficamente el esquema.
 - Revisar y refinar el diagrama.
 
-## 3.7 Debilidad
+## 3.7 Debilidad y dependencia
 Una entidad es débil frente a otra que es fuerte cuando para existir un elemento de la débil es necesario que exista un elemento de la fuerte.
 
 Por ejemplo, en la gestión de pedidos y ventas de un comercio, un pedido consta de varias líneas de pedido (una por cada producto). Si PEDIDO es una entidad y LINEA_PEDIDO es otra entidad, PEDIDO sería entidad fuerte y LINEA_PEDIDO una entidad débil respecto de la anterior.
 
-Las entidades débiles se representan en los diagramas E/R rodeadas por una
+Las **entidades débiles** se representan en los diagramas E/R rodeadas por una
 línea doble:
 ![](./img/debilidad.jpg)
 
-- Dependencia en existencia: Las ocurrencias de una entidad débil no tienen ningún sentido en la base de datos sin una ocurrencia de la entidad fuerte con la que están relacionadas.
+- **Dependencia en existencia**: Las ocurrencias de una entidad débil no tienen ningún sentido en la base de datos sin una ocurrencia de la entidad fuerte con la que están relacionadas.
+
 ![](./img/debilidadExistencia.jpg)
 
-- Dependencia en identificación: Además de la dependencia en existencia, la entidad débil necesita a la fuerte para poder crear una clave a partir de la clave que tiene la entidad fuerte. Es decir, en el ejemplo, cada línea de pedido se identificaría con
+- **Dependencia en identificación**: Además de la dependencia en existencia, la entidad débil necesita a la fuerte para poder crear una clave a partir de la clave que tiene la entidad fuerte. Es decir, en el ejemplo, cada línea de pedido se identificaría con
 numPed y numLinea.
+
 ![](./img/debilidadIdentificacion.jpg)
 
 ## 3.8 Ejemplo completo de E/R
@@ -264,12 +272,97 @@ numPed y numLinea.
 
 > Actividad 2.1
 
+> Actividad 2.2
+
 # 4. Diagrama Entidad/Relación Extendido (DER-E)
+El modelo E/R extendido (DER-E) amplía el modelo entidad/relación clásico incorporando nuevos conceptos que permiten representar con mayor precisión la realidad del sistema. Estos elementos adicionales son especialmente útiles en el diseño lógico de bases de datos complejas.
 
 ## 4.1. Atributos compuestos, multivaluados y derivados
-## 4.2. Generalización/especialización
-## 4.3. Agregación
+Los atributos pueden clasificarse según su estructura y forma de obtención:
+- **Atributos compuestos**: Son aquellos que pueden descomponerse en varios subatributos.
+  
+  Ejemplo: Dirección puede dividirse en Calle, Número, Ciudad, Código Postal.
 
+- **Atributos multivaluados**: Son aquellos que pueden tener más de un valor para una misma ocurrencia de entidad.
+  
+  Ejemplo: Teléfonos en una entidad Persona.
+
+- **Atributos derivados**: Son aquellos cuyo valor puede calcularse a partir de otros atributos.
+  
+  Ejemplo: Edad puede derivarse de Fecha de nacimiento.
+
+Aunque los atributos derivados pueden facilitar ciertas consultas, no es recomendable almacenarlos directamente en la base de datos, ya que pueden generar inconsistencias si los datos base cambian.
+
+## 4.2. Generalización/especialización
+Estos conceptos permiten representar jerarquías entre entidades:
+- **Generalización**: Proceso de abstraer características comunes de varias entidades para formar una entidad más general (superclase).
+  
+  Ejemplo: Empleado como superclase de Operario y Encargado.
+
+- **Especialización**: Proceso inverso a la generalización, donde se identifican subconjuntos de una entidad general que tienen atributos o comportamientos específicos.
+  
+  Ejemplo: Persona especializada en Alumno y Profesor.
+
+En los diagramas E/R, la generalización se representa mediante un triángulo invertido que conecta la superclase con sus subclases.
+
+![](./img/ejemploGeneralizacion.jpg)
+
+Tipos de especialización/generalización según restricciones:
+- **Exclusiva total**: Cada elemento de la superclase pertenece a una única subclase y todos los elementos están en alguna subclase.
+
+Ejemplo:
+- Superclase: Empleado
+- Subclases: Operario, Encargado
+  - Todos los empleados son o bien operarios o bien encargados, pero no pueden ser ambos.
+
+Se representa de la siguiente forma:
+
+![](./img/especializacionExclusivaTotal.jpg)
+
+- **Exclusiva parcial**: Cada elemento pertenece a una única subclase, pero no todos los elementos están en alguna subclase.
+
+Ejemplo:
+- Superclase: Persona
+- Subclases: Alumno, Profesor
+  - Algunas personas no son ni alumnos ni profesores, y las que lo son solo pueden ser una de las dos.
+
+Se representa de la siguiente forma:
+
+![](./img/especializacionExclusivaParcial.jpg)
+
+- **Solapada total**: Un elemento puede pertenecer a varias subclases y todos los elementos están en alguna subclase.
+
+Ejemplo:
+- Superclase: Usuario
+- Subclases: Comprador, Vendedor
+  - Todos los usuarios son al menos compradores o vendedores, y pueden ser ambos.
+
+Se representa de la siguiente forma:
+
+![](./img/especializacionSolapadaTotal.jpg)
+
+- **Solapada parcial**: Un elemento puede pertenecer a varias subclases, pero no todos los elementos están en alguna subclase.
+
+Ejemplo:
+- Superclase: Persona
+- Subclases: Cliente, Proveedor
+  - Algunas personas no son ni clientes ni proveedores, y otras pueden ser ambas cosas.
+
+Se representa de la siguiente forma:
+
+![](./img/especializacionSolapadaParcial.jpg)
+
+## 4.3. Agregación
+La agregación permite representar una relación como una entidad para que pueda participar en otras relaciones. Es útil cuando queremos modelar relaciones entre relaciones.
+
+  Ejemplo:
+  Supongamos que tenemos una relación Compra entre Cliente y Producto. Si queremos relacionar esa compra con un Vendedor, podemos usar agregación para tratar Compra como una entidad y relacionarla con Vendedor.
+
+La agregación se representa gráficamente como un rectángulo que engloba la relación original y las entidades participantes, conectándose luego con la nueva entidad o relación.
+
+> Actividad 2.3
+
+> Actividad 2.4
 
 # 5. Reglas de integridad
 
